@@ -2,6 +2,40 @@
    Lemonade Hair Swansea — Shared Scripts
    ══════════════════════════════════════ */
 
+// ── Mobile menu
+(function() {
+  const navEl = document.getElementById('nav');
+  if (!navEl) return;
+
+  // Hamburger button
+  const hamburger = document.createElement('button');
+  hamburger.className = 'nav-hamburger';
+  hamburger.setAttribute('aria-label', 'Toggle menu');
+  hamburger.innerHTML = '<span></span><span></span><span></span>';
+  navEl.appendChild(hamburger);
+
+  // Full-screen menu overlay
+  const menu = document.createElement('div');
+  menu.className = 'mobile-menu';
+  const inner = document.createElement('div');
+  inner.className = 'mobile-menu-inner';
+
+  // Collect all nav links from both .nav-links groups
+  navEl.querySelectorAll('.nav-links a').forEach(link => {
+    const clone = link.cloneNode(true);
+    clone.addEventListener('click', close);
+    inner.appendChild(clone);
+  });
+  menu.appendChild(inner);
+  document.body.appendChild(menu);
+
+  function open()  { menu.classList.add('open'); document.body.classList.add('menu-open'); }
+  function close() { menu.classList.remove('open'); document.body.classList.remove('menu-open'); }
+
+  hamburger.addEventListener('click', () => menu.classList.contains('open') ? close() : open());
+  menu.addEventListener('click', e => { if (e.target === menu) close(); });
+})();
+
 // ── Cursor
 const cur  = document.getElementById('cur');
 const curF = document.getElementById('cur-f');

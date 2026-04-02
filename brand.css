@@ -353,6 +353,117 @@ footer {
   color: var(--muted); border: 1px solid rgba(112,107,98,.3); padding: 5px 12px;
 }
 
+/* ════════════════════════════════════════
+   MOBILE NAVIGATION
+   ════════════════════════════════════════ */
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: none; padding: 6px;
+  position: relative; z-index: 210;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 1.5px; background: var(--gold);
+  transition: transform .35s cubic-bezier(.16,1,.3,1), opacity .3s;
+  transform-origin: center;
+}
+body.menu-open .nav-hamburger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+body.menu-open .nav-hamburger span:nth-child(2) { opacity: 0; }
+body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.mobile-menu {
+  position: fixed; inset: 0; z-index: 205;
+  background: rgba(8,8,7,.97);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .4s cubic-bezier(.16,1,.3,1);
+}
+.mobile-menu.open { opacity: 1; pointer-events: all; }
+.mobile-menu-inner {
+  display: flex; flex-direction: column; align-items: center; width: 220px;
+}
+.mobile-menu-inner a {
+  font-size: 10.5px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--secondary); text-decoration: none;
+  padding: 18px 0; display: block; text-align: center; width: 100%;
+  border-bottom: 1px solid rgba(200,168,75,.07);
+  transition: color .3s; cursor: none;
+}
+.mobile-menu-inner a:last-child { border-bottom: none; }
+.mobile-menu-inner a:hover, .mobile-menu-inner a.active { color: var(--gold); }
+.mobile-menu-inner .btn-nav {
+  color: var(--bg-deep) !important; background: var(--gold) !important;
+  margin-top: 32px; padding: 16px 52px !important; border-bottom: none !important;
+  transition: background .3s !important;
+}
+.mobile-menu-inner .btn-nav:hover { background: var(--gold-light) !important; }
+
+/* ════════════════════════════════════════
+   RESPONSIVE — TABLET / FOLDABLE OPEN (≤960px)
+   ════════════════════════════════════════ */
+@media (max-width: 960px) {
+  /* Nav */
+  nav { padding: 22px 28px; }
+  nav.scrolled { padding: 15px 28px; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  body.menu-open { overflow: hidden; }
+
+  /* Custom cursor — hide on touch */
+  #cur, #cur-f { display: none; }
+  a, button { cursor: auto; }
+
+  /* Footer */
+  footer { padding: 52px 28px 36px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+
+  /* CTA */
+  .cta-section { padding: 100px 28px; }
+
+  /* Page heroes */
+  .page-hero { padding: 96px 28px 60px; }
+  .page-hero-heading { font-size: clamp(52px, 10vw, 96px); }
+
+  /* Reviews section */
+  .reviews-section { padding: 80px 28px 88px; }
+  .reviews-grid { grid-template-columns: 1fr; gap: 20px; }
+
+  /* Team section (brand.css version) */
+  .team-section { padding: 72px 28px; }
+  .team-head { margin-bottom: 40px; }
+  .team-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE — MOBILE PHONE / FOLDABLE FOLDED (≤640px)
+   ════════════════════════════════════════ */
+@media (max-width: 640px) {
+  nav { padding: 20px 20px; }
+  nav.scrolled { padding: 14px 20px; }
+
+  /* Footer */
+  footer { padding: 48px 20px 32px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .f-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  .socials { justify-content: center; }
+
+  /* CTA */
+  .cta-section { padding: 72px 20px; }
+  .btn-cta { padding: 17px 36px; font-size: 10px; }
+
+  /* Page heroes */
+  .page-hero { padding: 84px 20px 48px; min-height: 40vh; }
+  .page-hero-heading { font-size: clamp(46px, 13vw, 72px); }
+  .page-hero-sub { font-size: 12.5px; }
+
+  /* Reviews */
+  .reviews-section { padding: 56px 20px 64px; }
+  .reviews-head { margin-bottom: 44px; }
+
+  /* Team */
+  .team-section { padding: 52px 20px; }
+  .team-grid { grid-template-columns: 1fr; gap: 14px; }
+}
+
 /* ── KEYFRAMES ── */
 @keyframes fadeUp   { to { opacity: 1; transform: translateY(0); } }
 @keyframes slideUp  { to { opacity: 1; transform: translateY(0); } }

@@ -163,6 +163,30 @@
       transition: color .3s, border-color .3s;
     }
     .insta-handle:hover { color: var(--gold-light); border-color: var(--gold-light); }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .gallery-hero { padding: 100px 28px 56px; }
+      .filter-bar-wrap { top: 73px; }
+      .filter-bar { padding: 0 28px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .filter-btn { flex-shrink: 0; }
+      .masonry-section { padding: 44px 28px 80px; }
+      .masonry-grid { columns: 2; column-gap: 12px; }
+      .g-full-item { margin-bottom: 12px; }
+      .insta-strip { padding: 52px 28px; }
+    }
+    @media (max-width: 640px) {
+      .gallery-hero { padding: 84px 20px 44px; }
+      .filter-bar { padding: 0 16px; }
+      .filter-btn { padding: 16px 18px; font-size: 9px; }
+      .masonry-section { padding: 32px 16px 60px; }
+      .masonry-grid { columns: 1; }
+      .g-full-item { margin-bottom: 10px; }
+      .insta-strip { padding: 44px 20px; }
+      .lightbox-prev { left: 12px; }
+      .lightbox-next { right: 12px; }
+      .lightbox-close { top: 20px; right: 20px; }
+      .lightbox-inner { max-width: 95vw; }
+    }
   </style>
 </head>
 <body>

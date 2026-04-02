@@ -693,6 +693,127 @@
       display:flex; flex-direction:column;
     }
 
+    /* ════════════════════════════════════════
+       MOBILE NAV — index.html (no brand.css)
+       ════════════════════════════════════════ */
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: auto; padding: 6px; z-index: 210;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 1.5px; background: var(--gold);
+      transition: transform .35s cubic-bezier(.16,1,.3,1), opacity .3s;
+      transform-origin: center;
+    }
+    body.menu-open .nav-hamburger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    body.menu-open .nav-hamburger span:nth-child(2) { opacity: 0; }
+    body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-menu {
+      position: fixed; inset: 0; z-index: 205;
+      background: rgba(8,8,7,.97);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .4s cubic-bezier(.16,1,.3,1);
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu-inner { display: flex; flex-direction: column; align-items: center; width: 220px; }
+    .mobile-menu-inner a {
+      font-size: 10.5px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--secondary); text-decoration: none;
+      padding: 18px 0; display: block; text-align: center; width: 100%;
+      border-bottom: 1px solid rgba(200,168,75,.07); transition: color .3s;
+    }
+    .mobile-menu-inner a:last-child { border-bottom: none; }
+    .mobile-menu-inner a:hover { color: var(--gold); }
+    .mobile-menu-inner .btn-nav {
+      color: var(--bg-deep) !important; background: var(--gold) !important;
+      margin-top: 32px; padding: 16px 52px !important; border-bottom: none !important;
+    }
+
+    /* ════════════════════════════════════════
+       RESPONSIVE — index.html
+       ════════════════════════════════════════ */
+    @media (max-width: 960px) {
+      /* Cursor */
+      #cur, #cur-f { display: none; }
+      a, button { cursor: auto; }
+      nav { padding: 22px 28px; }
+      nav.scrolled { padding: 15px 28px; }
+      .nav-links { display: none; }
+
+      /* Hero */
+      .hero { min-height: 85vh; }
+      .hero-content { padding: 0 28px 60px; flex-direction: column; align-items: flex-start; gap: 32px; }
+      .hero-right { align-self: flex-end; }
+      .hero-hours { padding: 80px 28px 60px 80px; }
+
+      /* Editorial / About */
+      .editorial { grid-template-columns: 1fr; }
+      .editorial-img { min-height: 52vh; }
+      .editorial-text { padding: 56px 40px; }
+
+      /* Services */
+      .services-section { padding: 80px 28px; }
+      .srv-stage { height: 460px; }
+
+      /* Story */
+      .story-section { grid-template-columns: 1fr; min-height: unset; }
+      .story-img { min-height: 46vh; }
+      .story-text { padding: 56px 40px; }
+
+      /* Team (index horizontal cards) */
+      .team-section { padding: 72px 28px; }
+      .team-grid { grid-template-columns: 1fr; gap: 16px; }
+      .team-card { height: 220px; }
+      .team-card-img { width: 190px; }
+
+      /* Gallery */
+      .gallery-section { padding: 72px 0 72px 28px; }
+
+      /* CTA (index local) */
+      .cta-section { padding: 100px 28px; }
+    }
+
+    @media (max-width: 640px) {
+      /* Hero */
+      .hero { min-height: 100svh; }
+      .hero-content { padding: 0 20px 52px; }
+      .hero-headline { font-size: clamp(52px, 15vw, 80px); }
+      .hero-sub { font-size: 12.5px; max-width: 260px; }
+      .hero-hours { display: none; }
+
+      /* Marquee */
+      .marquee-tag { padding: 0 24px; }
+
+      /* Editorial */
+      .editorial-text { padding: 44px 20px; }
+      .editorial-img { min-height: 44vh; }
+
+      /* Services */
+      .services-section { padding: 56px 20px; }
+      .services-head { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .srv-stage { height: 360px; }
+      .s-name { font-size: 34px; }
+      .s-card-body { padding: 20px 24px 28px; }
+
+      /* Story */
+      .story-text { padding: 44px 20px; }
+      .story-img { min-height: 38vh; }
+
+      /* Team */
+      .team-section { padding: 52px 20px; }
+      .team-card { flex-direction: column; height: auto; }
+      .team-card-img { width: 100%; height: 220px; }
+      .team-card-body { padding: 22px 20px 26px; }
+      .team-bio { font-size: 12px; }
+
+      /* Gallery */
+      .gallery-section { padding: 56px 0 56px 20px; }
+
+      /* CTA */
+      .cta-section { padding: 72px 20px; }
+    }
+
     /* ── KEYFRAMES ── */
     @keyframes fadeUp   { to { opacity:1; transform:translateY(0); } }
     @keyframes slideUp  { to { opacity:1; transform:translateY(0); } }
@@ -1238,6 +1359,43 @@
       sIdx = +d.dataset.dot; renderSrv();
     }));
     renderSrv();
+
+    // ── Touch swipe for carousel
+    let tsX = null;
+    document.getElementById('srvStage').addEventListener('touchstart', e => { tsX = e.touches[0].clientX; }, { passive: true });
+    document.getElementById('srvStage').addEventListener('touchend', e => {
+      if (tsX === null) return;
+      const dx = e.changedTouches[0].clientX - tsX;
+      if (Math.abs(dx) > 40) { sIdx = dx < 0 ? (sIdx + 1) % sTotal : (sIdx - 1 + sTotal) % sTotal; renderSrv(); }
+      tsX = null;
+    });
+
+    // ── Mobile menu
+    (function() {
+      const navEl2 = document.getElementById('nav');
+      const hamburger = document.createElement('button');
+      hamburger.className = 'nav-hamburger';
+      hamburger.setAttribute('aria-label', 'Toggle menu');
+      hamburger.innerHTML = '<span></span><span></span><span></span>';
+      navEl2.appendChild(hamburger);
+
+      const menu = document.createElement('div');
+      menu.className = 'mobile-menu';
+      const inner = document.createElement('div');
+      inner.className = 'mobile-menu-inner';
+      navEl2.querySelectorAll('.nav-links a').forEach(link => {
+        const clone = link.cloneNode(true);
+        clone.addEventListener('click', closeMobileMenu);
+        inner.appendChild(clone);
+      });
+      menu.appendChild(inner);
+      document.body.appendChild(menu);
+
+      function openMobileMenu()  { menu.classList.add('open'); document.body.classList.add('menu-open'); }
+      function closeMobileMenu() { menu.classList.remove('open'); document.body.classList.remove('menu-open'); }
+      hamburger.addEventListener('click', () => menu.classList.contains('open') ? closeMobileMenu() : openMobileMenu());
+      menu.addEventListener('click', e => { if (e.target === menu) closeMobileMenu(); });
+    })();
   </script>
 </body>
 </html>

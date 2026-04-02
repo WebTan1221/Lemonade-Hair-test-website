@@ -130,6 +130,32 @@
     .profile-book:hover { transform: translateY(-2px); }
     .profile-book:hover::before { transform: translateX(0); }
     .profile-book span { position: relative; z-index: 1; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .team-hero { padding: 100px 28px 64px; min-height: 48vh; }
+      .stats-strip { padding: 28px; flex-wrap: wrap; gap: 0; }
+      .stat-item { flex: 1 1 45%; padding: 16px 20px; }
+      .stat-item + .stat-item { border-left: none; border-top: 1px solid rgba(200,168,75,.1); }
+      .stat-item:nth-child(2) { border-left: 1px solid rgba(200,168,75,.14); }
+      .profile-section { grid-template-columns: 1fr; min-height: unset; }
+      .profile-section.flip { direction: ltr; }
+      .profile-img { min-height: 52vh; order: 0; }
+      .profile-section.flip .profile-img { order: 1; }
+      .profile-text { padding: 56px 40px; order: 1; }
+      .profile-section.flip .profile-text { order: 0; }
+      .profile-name { font-size: clamp(44px, 8vw, 72px); }
+    }
+    @media (max-width: 640px) {
+      .team-hero { padding: 84px 20px 48px; }
+      .stats-strip { padding: 16px; }
+      .stat-item { flex: 1 1 45%; padding: 12px 12px; }
+      .stat-num { font-size: 30px; }
+      .stat-label { font-size: 8.5px; letter-spacing: .16em; }
+      .profile-img { min-height: 44vh; }
+      .profile-text { padding: 40px 20px; }
+      .profile-bio { max-width: 100%; font-size: 13px; }
+      .profile-book { padding: 16px 32px; }
+    }
   </style>
 </head>
 <body>

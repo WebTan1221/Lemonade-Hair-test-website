@@ -152,6 +152,25 @@
     .badge-count {
       font-size: 11px; color: var(--muted); margin-left: 6px; letter-spacing: .04em;
     }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      .reviews-hero { padding: 100px 28px 64px; }
+      .summary-bar { padding: 36px 28px; flex-wrap: wrap; gap: 0; }
+      .sum-item { flex: 1 1 45%; padding: 16px 20px; }
+      .sum-item + .sum-item { border-left: none; border-top: 1px solid rgba(200,168,75,.1); }
+      .sum-item:nth-child(2) { border-left: 1px solid rgba(200,168,75,.14); }
+      .testimonials-section { padding: 72px 28px 88px; }
+      .t-cols-wrap { max-height: 640px; }
+    }
+    @media (max-width: 640px) {
+      .reviews-hero { padding: 84px 20px 52px; }
+      .summary-bar { padding: 28px 20px; flex-direction: column; gap: 0; }
+      .sum-item { flex: none; width: 100%; padding: 20px 0; border-left: none !important; border-top: 1px solid rgba(200,168,75,.08); }
+      .sum-item:first-child { border-top: none; }
+      .sum-big { font-size: 48px; }
+      .testimonials-section { padding: 52px 20px 64px; }
+      .t-cols-wrap { max-height: 520px; }
+    }
   </style>
 </head>
 <body>
