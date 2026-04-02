@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lemonade Hair Swansea — Women's Hair Studio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --bg-deep:    #080807;
+      --bg-dark:    #0d0d0b;
+      --bg-mid:     #141410;
+      --bg-card:    #111110;
+      --gold:       #C8A84B;
+      --gold-light: #E5C96A;
+      --gold-dim:   #6e5c28;
+      --white:      #F4F1EC;
+      --muted:      #706b62;
+      --secondary:  #a09890;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-deep);
+      color: var(--white);
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── CURSOR ── */
+    #cur { position:fixed; width:8px; height:8px; background:var(--gold); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:width .25s,height .25s,background .25s; }
+    #cur-f { position:fixed; width:36px; height:36px; border:1px solid rgba(200,168,75,.35); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .3s,height .3s,border-color .3s; }
+    body:has(a:hover) #cur, body:has(button:hover) #cur { width:14px; height:14px; background:var(--gold-light); }
+    body:has(a:hover) #cur-f, body:has(button:hover) #cur-f { width:52px; height:52px; border-color:rgba(200,168,75,.15); }
+    a, button { cursor:none; }
+
+    /* ── GRAIN ── */
+    body::after {
+      content:''; position:fixed; inset:0; pointer-events:none; z-index:9990; opacity:.028;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size:160px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position:fixed; top:0; left:0; right:0; z-index:200;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:32px 52px;
+      transition:padding .45s ease, background .45s ease, border-color .45s ease;
+      border-bottom:1px solid transparent;
+    }
+    nav.scrolled {
+      padding:18px 52px;
+      background:radial-gradient(ellipse 48% 220% at 50% -20%, rgba(8,8,7,.82) 0%, rgba(8,8,7,.08) 100%);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border-bottom-color:rgba(200,168,75,.10);
+    }
+    nav.scrolled .nav-logo {
+      text-shadow:0 0 32px rgba(200,168,75,.18), 0 2px 12px rgba(0,0,0,.6);
+    }
+    .nav-links { display:flex; gap:40px; align-items:center; }
+    .nav-link {
+      font-size:10.5px; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
+      color:var(--secondary); text-decoration:none; position:relative;
+      transition:color .3s;
+    }
+    .nav-link::after {
+      content:''; position:absolute; bottom:-3px; left:0; width:0; height:1px;
+      background:var(--gold); transition:width .35s cubic-bezier(.16,1,.3,1);
+    }
+    .nav-link:hover { color:var(--gold); }
+    .nav-link:hover::after { width:100%; }
+    .nav-logo {
+      font-family:'Cormorant Garamond', serif; font-size:20px; font-weight:300;
+      letter-spacing:.3em; text-transform:uppercase; color:var(--white);
+      text-decoration:none; text-align:center; line-height:1;
+    }
+    .nav-logo small {
+      display:block; font-family:'Syne',sans-serif; font-size:9px; font-weight:600;
+      letter-spacing:.4em; color:var(--gold); margin-top:4px;
+    }
+    .btn-nav {
+      font-size:10.5px; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
+      color:var(--bg-deep); background:var(--gold); padding:11px 26px;
+      text-decoration:none; border:none; display:inline-block;
+      transition:background .3s, transform .2s;
+    }
+    .btn-nav:hover { background:var(--gold-light); transform:translateY(-1px); }
+    .btn-nav:active { transform:translateY(0); }
+
+    /* ── HERO ── */
+    .hero {
+      position:relative; height:100vh; min-height:720px;
+      display:flex; align-items:flex-end; overflow:hidden;
+    }
+    .hero-bg {
+      position:absolute; inset:0;
+      background-image:url('https://images.pexels.com/photos/3065171/pexels-photo-3065171.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80');
+      background-size:cover; background-position:center 20%;
+      transform:scale(1.06);
+      transition:transform 9s cubic-bezier(.16,1,.3,1);
+      filter:brightness(.55);
+    }
+    .hero-bg.zoomed { transform:scale(1); }
+    .hero-bg::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(to bottom, rgba(8,8,7,.3) 0%, rgba(8,8,7,.1) 30%, rgba(8,8,7,.55) 70%, var(--bg-deep) 100%);
+    }
+    /* decorative large letter */
+    .hero-deco {
+      position:absolute; right:-2vw; top:50%; transform:translateY(-52%);
+      font-family:'Cormorant Garamond',serif; font-size:clamp(280px,30vw,480px);
+      font-weight:300; font-style:italic;
+      color:rgba(200,168,75,.045); line-height:1; pointer-events:none; z-index:1;
+      user-select:none;
+    }
+    .hero-content {
+      position:relative; z-index:2;
+      padding:0 52px 88px; width:100%;
+      display:flex; justify-content:space-between; align-items:flex-end;
+    }
+    .hero-left {}
+    .hero-eyebrow {
+      font-size:10.5px; font-weight:600; letter-spacing:.25em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:22px;
+      opacity:0; transform:translateY(18px);
+      animation:fadeUp .8s .3s ease forwards;
+    }
+    .hero-headline {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(72px,9.5vw,148px);
+      font-weight:300; line-height:.93; letter-spacing:-.025em;
+      color:var(--white); margin:0 0 36px;
+      text-shadow:0 2px 40px rgba(0,0,0,.55), 0 1px 8px rgba(0,0,0,.4);
+    }
+    .hero-headline em { font-style:italic; color:var(--gold-light); }
+    .hero-headline .ln { display:block; overflow:hidden; }
+    .hero-headline .ln span {
+      display:block; opacity:0; transform:translateY(105%);
+    }
+    .hero-headline .ln:nth-child(1) span { animation:slideUp .95s .5s cubic-bezier(.16,1,.3,1) forwards; }
+    .hero-headline .ln:nth-child(2) span { animation:slideUp .95s .65s cubic-bezier(.16,1,.3,1) forwards; }
+    .hero-headline .ln:nth-child(3) span { animation:slideUp .95s .8s cubic-bezier(.16,1,.3,1) forwards; }
+    .hero-sub {
+      font-size:13px; line-height:1.8; color:#c8bfb4; max-width:320px;
+      opacity:0; animation:fadeUp .8s 1.1s ease forwards;
+      text-shadow:0 1px 12px rgba(0,0,0,.5);
+    }
+    .hero-right {
+      text-align:center;
+      opacity:0; animation:fadeUp .8s 1.3s ease forwards;
+      display:flex; flex-direction:column; align-items:center;
+    }
+    .hero-detail {
+      font-size:10.5px; letter-spacing:.18em; text-transform:uppercase;
+      color:var(--muted); margin-bottom:8px;
+    }
+    .hero-scroll-line {
+      width:1px; height:72px; background:linear-gradient(to bottom,var(--gold),transparent);
+      animation:scrollPulse 2.2s 1.8s ease infinite;
+    }
+    /* ── HERO HOURS ── */
+    .hero-hours {
+      position:absolute; top:0; right:0; z-index:3;
+      padding: 96px 52px 100px 140px;
+      background: radial-gradient(ellipse 80% 65% at 100% 0%, rgba(4,4,3,.82) 0%, rgba(4,4,3,.38) 45%, transparent 75%);
+      pointer-events: none;
+      opacity:0; animation:fadeUp .8s 1.5s ease forwards;
+    }
+    .hero-hours > * { pointer-events: auto; }
+    .hero-hours-row {
+      display:flex; justify-content:space-between; gap:28px;
+      font-size:11px; letter-spacing:.04em; color:var(--secondary);
+      line-height:1.95;
+    }
+    .hero-hours-day { color:var(--gold); font-size:10.5px; letter-spacing:.06em; }
+    .hero-hours-time { text-align:right; }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      overflow:hidden;
+      border-top:1px solid rgba(200,168,75,.14);
+      border-bottom:1px solid rgba(200,168,75,.14);
+      padding:16px 0; background:var(--bg-dark);
+    }
+    .marquee-track {
+      display:flex; white-space:nowrap; align-items:center;
+      animation:marqueeRev 55s linear infinite;
+    }
+    .marquee-tag {
+      font-family:'Syne',sans-serif; font-weight:600;
+      font-size:10px; letter-spacing:.26em; text-transform:uppercase;
+      color:var(--muted); padding:0 44px; flex-shrink:0;
+    }
+    .marquee-tag.hi { color:rgba(200,168,75,.8); }
+    .marquee-bar {
+      width:1px; height:11px; background:rgba(200,168,75,.25);
+      flex-shrink:0;
+    }
+
+    /* ── SECTION UTILITIES ── */
+    .label {
+      font-size:10px; font-weight:600; letter-spacing:.3em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:22px; display:block;
+    }
+    .label::before { content:'—'; margin-right:10px; }
+    .gold-rule { width:40px; height:1px; background:var(--gold); margin:24px 0; }
+    .reveal {
+      opacity:0; transform:translateY(28px);
+      transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.vis { opacity:1; transform:translateY(0); }
+    .d1 { transition-delay:.1s; }
+    .d2 { transition-delay:.2s; }
+    .d3 { transition-delay:.32s; }
+    .d4 { transition-delay:.44s; }
+
+    /* ── EDITORIAL ── */
+    .editorial {
+      display:grid; grid-template-columns:1fr 1fr; min-height:92vh;
+    }
+    .editorial-img {
+      position:relative; overflow:hidden;
+    }
+    .editorial-img img {
+      width:100%; height:100%; object-fit:cover;
+      transition:transform 7s ease; transform:scale(1.04);
+      filter:grayscale(10%);
+    }
+    .editorial-img:hover img { transform:scale(1); filter:grayscale(0%); }
+    .editorial-img::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(135deg,rgba(200,168,75,.07) 0%,transparent 55%);
+      mix-blend-mode:overlay;
+    }
+    .editorial-text {
+      padding:88px 68px; display:flex; flex-direction:column;
+      justify-content:center; background:var(--bg-dark); position:relative; overflow:hidden;
+    }
+    .editorial-text .bg-L {
+      position:absolute; right:-16px; bottom:-60px;
+      font-family:'Cormorant Garamond',serif; font-size:320px; font-weight:300;
+      color:rgba(200,168,75,.035); line-height:1; pointer-events:none; user-select:none;
+    }
+    .editorial-heading {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(38px,3.8vw,58px); font-weight:300; line-height:1.08;
+      letter-spacing:-.01em; margin:0 0 24px; color:var(--white);
+    }
+    .editorial-heading em { font-style:italic; color:var(--gold-light); }
+    .editorial-body {
+      font-size:13.5px; line-height:1.85; color:var(--secondary);
+      max-width:380px; margin-bottom:20px;
+    }
+    .btn-ghost {
+      display:inline-block; font-size:10.5px; font-weight:600;
+      letter-spacing:.18em; text-transform:uppercase;
+      color:var(--gold); text-decoration:none;
+      border-bottom:1px solid rgba(200,168,75,.35); padding-bottom:3px;
+      transition:border-color .3s, color .3s;
+      align-self:flex-start; margin-top:10px;
+    }
+    .btn-ghost:hover { color:var(--gold-light); border-color:var(--gold-light); }
+
+    /* ── SERVICES ── */
+    .services-section { padding:128px 52px; background:var(--bg-deep); }
+    .services-head {
+      display:flex; justify-content:space-between; align-items:flex-end;
+      margin-bottom:60px;
+    }
+    .section-heading {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(48px,5.5vw,78px); font-weight:300; line-height:.96;
+      letter-spacing:-.025em; color:var(--white);
+    }
+    .section-heading em { font-style:italic; color:var(--gold-light); }
+    /* ── SERVICES CAROUSEL ── */
+    .srv-wrap { position:relative; }
+    .srv-stage { height:560px; position:relative; }
+    .srv-btn-wrap {
+      position:absolute; top:50%; z-index:10; transform:translateY(-50%);
+      display:flex; flex-direction:column; align-items:center;
+    }
+    .srv-btn-wrap.left { left:0; }
+    .srv-btn-wrap.right { right:0; }
+    .srv-btn {
+      width:52px; height:52px; background:rgba(200,168,75,.1);
+      border:1px solid rgba(200,168,75,.3); color:var(--gold);
+      font-size:20px; cursor:none;
+      display:flex; align-items:center; justify-content:center;
+      transition:background .3s, transform .2s; flex-shrink:0;
+    }
+    .srv-btn:hover { background:rgba(200,168,75,.25); transform:scale(1.08); }
+    .srv-btn:active { transform:scale(.97); }
+    .s-card {
+      position:absolute; height:100%; overflow:hidden;
+      will-change: transform, opacity, width, left;
+      isolation: isolate;
+      transition:left .65s cubic-bezier(.16,1,.3,1),
+                 right .65s cubic-bezier(.16,1,.3,1),
+                 width .65s cubic-bezier(.16,1,.3,1),
+                 opacity .65s cubic-bezier(.16,1,.3,1),
+                 filter .65s cubic-bezier(.16,1,.3,1),
+                 transform .65s cubic-bezier(.16,1,.3,1);
+    }
+    /* prev/next cards are clickable */
+    .s-card.is-prev, .s-card.is-next { cursor: none; }
+    .s-card img {
+      width:100%; height:100%; object-fit:cover;
+      transition:transform .75s ease; filter:none;
+    }
+    .s-card.is-active { width:50%; left:50%; transform:translateX(-50%); opacity:1; filter:none; z-index:2; }
+    .s-card.is-active img:hover { transform:scale(1.04); }
+    .s-card.is-prev { width:27%; left:2%; transform:none; opacity:.45; filter:blur(2px); z-index:1; }
+    .s-card.is-next { width:27%; right:2%; left:auto; transform:none; opacity:.45; filter:blur(2px); z-index:1; }
+    .s-card.is-hidden { width:27%; left:50%; transform:translateX(-50%); opacity:0; z-index:0; pointer-events:none; }
+    .s-card::after {
+      content:''; position:absolute; inset:0; z-index:1;
+      background:linear-gradient(
+        to top,
+        rgba(8,8,7,.85) 0%,
+        rgba(8,8,7,.72) 30%,
+        rgba(8,8,7,.45) 52%,
+        rgba(8,8,7,.1) 68%,
+        transparent 82%
+      );
+    }
+    .s-card-body {
+      position:absolute; bottom:0; left:0; right:0; z-index:2;
+      padding:28px 36px 40px;
+    }
+    /* Dark panel behind the text — feathered top edge dissolves into image */
+    .s-card-body::before {
+      content:''; position:absolute; inset:0; z-index:-1;
+      background: linear-gradient(to bottom, rgba(5,5,4,0) 0%, rgba(5,5,4,.88) 22%, rgba(5,5,4,.94) 100%);
+    }
+    /* animated gold rule — expands when card is active */
+    .s-card-rule {
+      width:0; height:1px; background:var(--gold);
+      margin-bottom:14px;
+      transition:width .6s cubic-bezier(.16,1,.3,1);
+    }
+    .s-card.is-active .s-card-rule { width:44px; }
+    .s-name {
+      font-family:'Cormorant Garamond',serif; font-size:44px; font-weight:400;
+      color:var(--white); display:block; margin-bottom:0; line-height:1;
+      text-shadow:0 2px 24px rgba(0,0,0,.7), 0 0 60px rgba(0,0,0,.4);
+    }
+    /* italic descriptor — slides in on active */
+    .s-tagline {
+      font-family:'Cormorant Garamond',serif; font-style:italic;
+      font-size:18px; font-weight:300;
+      color:rgba(200,168,75,.85); letter-spacing:.02em;
+      margin:0; max-height:0; overflow:hidden; opacity:0;
+      transition:max-height .5s .05s ease, opacity .4s .05s ease;
+    }
+    .s-card.is-active .s-tagline { max-height:44px; opacity:1; }
+    /* see details link — slides in on active */
+    .s-see-details {
+      display:inline-flex; align-items:center; gap:10px;
+      font-family:'Syne',sans-serif; font-size:10px; font-weight:600;
+      letter-spacing:.22em; text-transform:uppercase;
+      color:var(--gold); text-decoration:none;
+      margin-top:20px; max-height:0; overflow:hidden; opacity:0;
+      transition:max-height .45s .12s ease, opacity .38s .12s ease;
+      position:relative;
+    }
+    .s-see-details::after {
+      content:''; position:absolute; bottom:-3px; left:0;
+      width:0; height:1px; background:var(--gold);
+      transition:width .32s ease;
+    }
+    .s-see-details:hover::after { width:100%; }
+    .s-see-details .arr { display:inline-block; transition:transform .3s cubic-bezier(.16,1,.3,1); }
+    .s-see-details:hover .arr { transform:translateX(5px); }
+    .s-card.is-active .s-see-details { max-height:50px; opacity:1; }
+    .s-dots {
+      display:flex; justify-content:center; gap:8px; margin-top:28px;
+    }
+    .s-dot {
+      width:6px; height:6px; border-radius:50%;
+      background:rgba(200,168,75,.25); cursor:none;
+      transition:background .3s, transform .3s;
+    }
+    .s-dot.active { background:var(--gold); transform:scale(1.3); }
+
+    /* ── STORY ── */
+    .story-section {
+      display:grid; grid-template-columns:55% 45%; min-height:82vh;
+      background:var(--bg-mid);
+    }
+    .story-img { position:relative; overflow:hidden; }
+    .story-img img { width:100%; height:100%; object-fit:cover; }
+    .story-img::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(to right, transparent 65%, var(--bg-mid) 100%);
+    }
+    .story-text {
+      padding:80px 64px 80px 48px;
+      display:flex; flex-direction:column; justify-content:center;
+      position:relative; overflow:hidden;
+    }
+    .story-num {
+      font-family:'Cormorant Garamond',serif; font-size:96px; font-weight:300;
+      color:rgba(200,168,75,.1); line-height:1; margin-bottom:-16px;
+    }
+    .story-addr {
+      font-size:12px; line-height:2; color:var(--muted); letter-spacing:.05em;
+    }
+
+    /* ── GALLERY ── */
+    .gallery-section { padding:88px 0 88px 52px; background:var(--bg-deep); overflow:hidden; }
+    .gallery-head { padding-right:52px; margin-bottom:40px; display:flex; justify-content:space-between; align-items:flex-end; }
+    .gallery-viewport { overflow:hidden; width:100%; }
+    .gallery-reel {
+      display:flex; gap:14px; width:max-content;
+      animation:galleryScroll 32s linear infinite;
+    }
+    .gallery-reel:hover { animation-play-state:paused; }
+    .g-item {
+      flex-shrink:0; width:300px; aspect-ratio:3/4;
+      overflow:hidden; scroll-snap-align:start; position:relative;
+    }
+    .g-item img {
+      width:100%; height:100%; object-fit:cover;
+      filter:grayscale(30%); transition:transform .6s ease, filter .4s;
+    }
+    .g-item:hover img { transform:scale(1.05); filter:grayscale(0%); }
+    .g-item::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(8,8,7,.5) 0%, transparent 50%);
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding:168px 52px; text-align:center;
+      background:var(--bg-deep); position:relative; overflow:hidden;
+    }
+    .cta-section::before { display: none; }
+    .cta-heading {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(54px,7.5vw,112px); font-weight:300; line-height:.92;
+      letter-spacing:-.025em; color:var(--white); margin-bottom:40px;
+    }
+    .cta-heading em { font-style:italic; color:var(--gold-light); }
+    .cta-sub {
+      font-size:13px; letter-spacing:.08em; color:var(--secondary);
+      margin-bottom:52px;
+    }
+    .btn-cta {
+      display:inline-block; font-size:11px; font-weight:600;
+      letter-spacing:.22em; text-transform:uppercase;
+      color:var(--bg-deep); background:var(--gold);
+      padding:20px 56px; text-decoration:none;
+      position:relative; overflow:hidden;
+      transition:transform .2s;
+    }
+    .btn-cta::before {
+      content:''; position:absolute; inset:0;
+      background:var(--gold-light); transform:translateX(-101%);
+      transition:transform .45s cubic-bezier(.16,1,.3,1);
+    }
+    .btn-cta:hover { transform:translateY(-2px); }
+    .btn-cta:hover::before { transform:translateX(0); }
+    .btn-cta:active { transform:translateY(0); }
+    .btn-cta span { position:relative; z-index:1; }
+
+    /* ── FOOTER ── */
+    footer {
+      background:var(--bg-deep);
+      border-top:1px solid rgba(200,168,75,.1);
+      padding:72px 52px 44px;
+    }
+    .footer-grid {
+      display:grid; grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:52px; margin-bottom:64px;
+    }
+    .f-brand-name {
+      font-family:'Cormorant Garamond',serif; font-size:30px; font-weight:300;
+      letter-spacing:.28em; text-transform:uppercase; color:var(--white);
+    }
+    .f-brand-sub {
+      display:block; font-size:9px; font-weight:600; letter-spacing:.42em;
+      text-transform:uppercase; color:var(--gold); margin-top:5px;
+    }
+    .f-brand-text {
+      font-size:13px; line-height:1.75; color:var(--muted);
+      margin-top:22px; max-width:255px;
+    }
+    .f-col h4 {
+      font-size:9.5px; font-weight:600; letter-spacing:.28em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:20px;
+    }
+    .f-col ul { list-style:none; }
+    .f-col ul li { margin-bottom:11px; }
+    .f-col ul li a {
+      font-size:13px; color:var(--muted); text-decoration:none; letter-spacing:.02em;
+      transition:color .25s;
+    }
+    .f-col ul li a:hover { color:var(--gold); }
+    .f-col address { font-style:normal; font-size:13px; color:var(--muted); line-height:2; }
+    .f-bottom {
+      display:flex; justify-content:space-between; align-items:center;
+      border-top:1px solid rgba(255,255,255,.055); padding-top:28px;
+    }
+    .f-bottom p { font-size:11px; color:var(--muted); letter-spacing:.04em; }
+    .socials { display:flex; gap:24px; }
+    .socials a {
+      font-size:10.5px; letter-spacing:.15em; text-transform:uppercase;
+      color:var(--muted); text-decoration:none; transition:color .25s;
+    }
+    .socials a:hover { color:var(--gold); }
+
+    /* ── TEAM ── */
+    .team-section {
+      padding: 72px 52px;
+      background: var(--bg-dark);
+      position: relative; overflow: hidden;
+    }
+    .team-head {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; margin-bottom: 44px;
+    }
+    .team-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .team-card {
+      display: flex; height: 270px;
+      background: var(--bg-card);
+      border: 1px solid rgba(200,168,75,.08);
+      transition: border-color .4s;
+      overflow: hidden;
+    }
+    .team-card:hover { border-color: rgba(200,168,75,.22); }
+    .team-card-img {
+      width: 210px; flex-shrink: 0; overflow: hidden; position: relative; height: 100%;
+    }
+    .team-card-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: grayscale(15%);
+      transition: transform .7s ease, filter .4s;
+    }
+    .team-card:hover .team-card-img img { transform: scale(1.04); filter: grayscale(0%); }
+    .team-card-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to right, transparent 60%, rgba(8,8,7,.4) 100%);
+    }
+    .team-card-body { padding: 28px 32px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    .team-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px; font-weight: 300;
+      color: var(--white); margin-bottom: 4px; line-height: 1;
+    }
+    .team-role {
+      font-size: 9.5px; font-weight: 600;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 14px; display: block;
+    }
+    .team-bio {
+      font-size: 12.5px; line-height: 1.75;
+      color: var(--secondary); margin-bottom: 18px;
+    }
+    .team-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+    .team-tag {
+      font-size: 9px; font-weight: 600;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid rgba(112,107,98,.3);
+      padding: 4px 10px;
+    }
+
+    /* ── REVIEWS ── */
+    .reviews-section {
+      padding: 128px 52px;
+      background: var(--bg-deep);
+      position: relative;
+      overflow: hidden;
+    }
+    .reviews-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 500px;
+      background: radial-gradient(ellipse at center top, rgba(200,168,75,.04) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .reviews-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 72px;
+    }
+    .reviews-head .view-all {
+      font-size: 10.5px; font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      border-bottom: 1px solid rgba(112,107,98,.3);
+      padding-bottom: 3px;
+      transition: color .3s, border-color .3s;
+    }
+    .reviews-head .view-all:hover { color: var(--gold); border-color: rgba(200,168,75,.4); }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .r-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(200,168,75,.08);
+      padding: 44px 40px 40px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .4s, transform .4s cubic-bezier(.16,1,.3,1);
+    }
+    .r-card:hover {
+      border-color: rgba(200,168,75,.2);
+      transform: translateY(-4px);
+    }
+    .r-card::before {
+      content: '\201C';
+      position: absolute;
+      top: -8px; right: 28px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 140px; font-weight: 300; font-style: italic;
+      color: rgba(200,168,75,.08);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .r-stars {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 22px;
+    }
+    .r-star {
+      width: 11px; height: 11px;
+      display: inline-block;
+      background: var(--gold);
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+    .r-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-style: italic;
+      font-weight: 400; line-height: 1.7;
+      color: var(--white);
+      margin-bottom: 32px;
+      position: relative; z-index: 1;
+    }
+    .r-divider {
+      width: 28px; height: 1px;
+      background: rgba(200,168,75,.35);
+      margin-bottom: 20px;
+    }
+    .r-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 10.5px; font-weight: 600;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+    }
+    .r-detail {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: .04em;
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* ── ETHEREAL SHADOW ── */
+    .etheral-bg {
+      position:absolute; inset:0; overflow:hidden;
+      pointer-events:none; z-index:0;
+    }
+    .es-svg {
+      position:absolute; inset:0; display:block; width:100%; height:100%;
+    }
+    .es-content {
+      position:relative; z-index:1;
+      display:flex; flex-direction:column;
+    }
+
+    /* ── KEYFRAMES ── */
+    @keyframes fadeUp   { to { opacity:1; transform:translateY(0); } }
+    @keyframes slideUp  { to { opacity:1; transform:translateY(0); } }
+    @keyframes marquee    { 0% { transform:translateX(0);    } 100% { transform:translateX(-50%); } }
+    @keyframes marqueeRev { 0% { transform:translateX(-50%); } 100% { transform:translateX(0);    } }
+    @keyframes scrollPulse {
+      0%,100% { opacity:1; transform-origin:top; }
+      50% { opacity:.35; }
+    }
+    @keyframes galleryScroll {
+      0%   { transform:translateX(0); }
+      100% { transform:translateX(-50%); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cursor -->
+  <div id="cur"></div>
+  <div id="cur-f"></div>
+
+  <!-- ── NAV ── -->
+  <nav id="nav">
+    <div class="nav-links">
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="#about"    class="nav-link">Our Studio</a>
+      <a href="team.html" class="nav-link">Our Team</a>
+    </div>
+    <a href="index.html" class="nav-logo">
+      Lemonade
+      <small>Hair Swansea</small>
+    </a>
+    <div class="nav-links" style="justify-content:flex-end;">
+      <a href="gallery.html"  class="nav-link">Gallery</a>
+      <a href="reviews.html"  class="nav-link">Reviews</a>
+      <a href="book.html"     class="btn-nav">Book Now</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="hero-bg" id="heroBg"></div>
+
+    <!-- Hours panel — top right -->
+    <div class="hero-hours">
+      <div class="hero-hours-row">
+        <div>
+          <div class="hero-hours-day">Tue – Wed</div>
+          <div class="hero-hours-day">Thu</div>
+          <div class="hero-hours-day">Fri</div>
+          <div class="hero-hours-day">Sat</div>
+          <div class="hero-hours-day">Mon &amp; Sun</div>
+        </div>
+        <div class="hero-hours-time">
+          <div>9am – 6pm</div>
+          <div>9am – 7pm</div>
+          <div>9am – 6pm</div>
+          <div>9am – 3pm</div>
+          <div>Closed</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-left">
+        <p class="hero-eyebrow">Swansea's Women's Hair Studio</p>
+        <h1 class="hero-headline">
+          <span class="ln"><span>Beauty</span></span>
+          <span class="ln"><span>lives in</span></span>
+          <span class="ln"><span>every <em>Strand.</em></span></span>
+        </h1>
+        <p class="hero-sub">Colour, cuts &amp; styling crafted with precision — for the woman who notices every detail.</p>
+      </div>
+      <div class="hero-right">
+        <p class="hero-detail">Scroll to explore</p>
+        <div class="hero-scroll-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MARQUEE ── -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <span class="marquee-tag hi">Swansea's Women's Studio</span><span class="marquee-bar"></span>
+      <span class="marquee-tag">5★ Rated on Google</span><span class="marquee-bar"></span>
+      <span class="marquee-tag hi">Precision Colour Specialists</span><span class="marquee-bar"></span>
+      <span class="marquee-tag">Olaplex Certified</span><span class="marquee-bar"></span>
+      <span class="marquee-tag hi">Tue – Sat &nbsp;·&nbsp; From 9am</span><span class="marquee-bar"></span>
+      <span class="marquee-tag">Book Your Appointment</span><span class="marquee-bar"></span>
+      <!-- duplicate for seamless loop -->
+      <span class="marquee-tag hi">Swansea's Women's Studio</span><span class="marquee-bar"></span>
+      <span class="marquee-tag">5★ Rated on Google</span><span class="marquee-bar"></span>
+      <span class="marquee-tag hi">Precision Colour Specialists</span><span class="marquee-bar"></span>
+      <span class="marquee-tag">Olaplex Certified</span><span class="marquee-bar"></span>
+      <span class="marquee-tag hi">Tue – Sat &nbsp;·&nbsp; From 9am</span><span class="marquee-bar"></span>
+      <span class="marquee-tag">Book Your Appointment</span><span class="marquee-bar"></span>
+    </div>
+  </div>
+
+  <!-- ── EDITORIAL / ABOUT ── -->
+  <section class="editorial" id="about">
+    <div class="editorial-img">
+      <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&h=1080&q=80" alt="Lemonade Hair Studio interior" />
+    </div>
+    <div class="editorial-text">
+      <!-- Ethereal shadow background -->
+      <div class="etheral-bg">
+        <svg class="es-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <defs>
+            <filter id="esf-phil" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+              <feTurbulence type="fractalNoise" baseFrequency="0.006 0.004" numOctaves="3" seed="2" result="noise"/>
+              <feColorMatrix class="es-matrix" in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  5 0 0 0 -4" result="alpha-noise"/>
+              <feFlood flood-color="#c8920a" flood-opacity="0.55" result="amber"/>
+              <feComposite in="amber" in2="alpha-noise" operator="in" result="colored"/>
+              <feGaussianBlur in="colored" stdDeviation="18"/>
+            </filter>
+          </defs>
+          <rect width="100%" height="100%" filter="url(#esf-phil)"/>
+        </svg>
+      </div>
+      <div class="es-content">
+        <span class="label reveal">Our Philosophy</span>
+        <h2 class="editorial-heading reveal d1">
+          Crafted with<br>
+          <em>intention.</em><br>
+          Worn with confidence.
+        </h2>
+        <div class="gold-rule reveal d2"></div>
+        <p class="editorial-body reveal d2">
+          At Lemonade Hair, every appointment is a collaboration. We take time to understand your hair, your lifestyle, and the vision you carry — then bring it to life with the kind of precision that only comes with true craft.
+        </p>
+        <p class="editorial-body reveal d3">
+          Based in the heart of Swansea, our studio is a quiet space for women who know exactly what they want — and want it done right.
+        </p>
+        <a href="book.html" class="btn-ghost reveal d3">Book a Consultation →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ── -->
+  <section class="services-section" id="services">
+    <div class="services-head">
+      <div>
+        <span class="label reveal">What We Do</span>
+        <h2 class="section-heading reveal d1">Our <em>services.</em></h2>
+      </div>
+      <a href="services.html" class="btn-nav reveal" style="margin-bottom:6px;">Full Price List</a>
+    </div>
+
+    <div class="srv-wrap">
+      <!-- Left arrow -->
+      <div class="srv-btn-wrap left">
+        <button class="srv-btn" id="srvPrev">&#8592;</button>
+      </div>
+
+      <div class="srv-stage" id="srvStage">
+        <!-- Card 0: Cuts & Styling -->
+        <div class="s-card" data-idx="0">
+          <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=800&h=1100&q=80" alt="Cuts & Styling" />
+          <div class="s-card-body">
+            <div class="s-card-rule"></div>
+            <span class="s-name">Cuts &amp; Styling</span>
+            <p class="s-tagline">From a fresh restyle to a precise finish</p>
+            <a href="services.html" class="s-see-details">See Details <span class="arr">→</span></a>
+          </div>
+        </div>
+        <!-- Card 1: Blow Dry -->
+        <div class="s-card" data-idx="1">
+          <img src="https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=800&h=1100&fit=crop" alt="Blow Dry" />
+          <div class="s-card-body">
+            <div class="s-card-rule"></div>
+            <span class="s-name">Blow Dry</span>
+            <p class="s-tagline">Salon-perfect finish, every time</p>
+            <a href="services.html" class="s-see-details">See Details <span class="arr">→</span></a>
+          </div>
+        </div>
+        <!-- Card 2: Olaplex -->
+        <div class="s-card" data-idx="2">
+          <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=800&h=1100&q=80" alt="Olaplex" />
+          <div class="s-card-body">
+            <div class="s-card-rule"></div>
+            <span class="s-name">Olaplex</span>
+            <p class="s-tagline">Repair, strengthen &amp; protect your hair</p>
+            <a href="services.html" class="s-see-details">See Details <span class="arr">→</span></a>
+          </div>
+        </div>
+        <!-- Card 3: Colour -->
+        <div class="s-card" data-idx="3">
+          <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=800&h=1100&q=80" alt="Colour" />
+          <div class="s-card-body">
+            <div class="s-card-rule"></div>
+            <span class="s-name">Colour</span>
+            <p class="s-tagline">Balayage, tints, highlights &amp; correction</p>
+            <a href="services.html" class="s-see-details">See Details <span class="arr">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right arrow -->
+      <div class="srv-btn-wrap right">
+        <button class="srv-btn" id="srvNext">&#8594;</button>
+      </div>
+
+      <!-- Dots -->
+      <div class="s-dots">
+        <span class="s-dot active" data-dot="0"></span>
+        <span class="s-dot" data-dot="1"></span>
+        <span class="s-dot" data-dot="2"></span>
+        <span class="s-dot" data-dot="3"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STORY ── -->
+  <section class="story-section">
+    <div class="story-img reveal">
+      <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=1100&h=900&q=80" alt="Lemonade Hair Swansea storefront" />
+    </div>
+    <div class="story-text">
+      <!-- Ethereal shadow background -->
+      <div class="etheral-bg">
+        <svg class="es-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <defs>
+            <filter id="esf-studio" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+              <feTurbulence type="fractalNoise" baseFrequency="0.006 0.004" numOctaves="3" seed="7" result="noise"/>
+              <feColorMatrix class="es-matrix" in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  5 0 0 0 -4" result="alpha-noise"/>
+              <feFlood flood-color="#c8920a" flood-opacity="0.55" result="amber"/>
+              <feComposite in="amber" in2="alpha-noise" operator="in" result="colored"/>
+              <feGaussianBlur in="colored" stdDeviation="18"/>
+            </filter>
+          </defs>
+          <rect width="100%" height="100%" filter="url(#esf-studio)"/>
+        </svg>
+      </div>
+      <div class="es-content">
+        <span class="label reveal">Lemonade Hair, Swansea</span>
+        <h2 class="editorial-heading reveal d1">
+          A studio<br>built on <em>detail.</em>
+        </h2>
+        <div class="gold-rule reveal d2"></div>
+        <p class="editorial-body reveal d2">
+          From the moment you walk through our door, you're in the hands of stylists who care deeply about their craft. We use only the finest colour systems and the most refined cutting techniques.
+        </p>
+        <p class="story-addr reveal d3">
+          Tue – Wed: 9am – 6pm<br>
+          Thu: 9am – 7pm<br>
+          Fri: 9am – 6pm<br>
+          Sat: 9am – 3pm<br>
+          Mon &amp; Sun: Closed<br>
+          Swansea, Wales
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MEET THE TEAM ── -->
+  <section class="team-section" id="team">
+    <div class="team-head">
+      <div>
+        <span class="label reveal">The People Behind the Work</span>
+        <h2 class="section-heading reveal d1">Meet the <em>team.</em></h2>
+      </div>
+      <a href="team.html" class="btn-ghost reveal d2">Full Profiles →</a>
+    </div>
+    <div class="team-grid">
+
+      <div class="team-card reveal d1">
+        <div class="team-card-img">
+          <img src="https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&fit=crop" alt="Cerys Davies — Senior Stylist" />
+        </div>
+        <div class="team-card-body">
+          <span class="team-role">Senior Stylist &amp; Colour Specialist</span>
+          <h3 class="team-name">Cerys Davies</h3>
+          <p class="team-bio">With over eight years behind the chair, Cerys is the studio's lead colourist. Her work spans seamless balayage to complex colour corrections — always approached with a precise, considered eye.</p>
+          <div class="team-tags">
+            <span class="team-tag">Balayage</span>
+            <span class="team-tag">Colour Correction</span>
+            <span class="team-tag">Tints &amp; Toners</span>
+          </div>
+          <a href="book.html" class="btn-ghost">Book with Cerys →</a>
+        </div>
+      </div>
+
+      <div class="team-card reveal d2">
+        <div class="team-card-img">
+          <img src="https://images.pexels.com/photos/3065169/pexels-photo-3065169.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&fit=crop" alt="Megan Williams — Stylist" />
+        </div>
+        <div class="team-card-body">
+          <span class="team-role">Stylist &amp; Olaplex Specialist</span>
+          <h3 class="team-name">Megan Williams</h3>
+          <p class="team-bio">Megan joined Lemonade three years ago and quickly became the go-to for clients seeking healthier, stronger hair. Olaplex-certified and passionate about the science of hair, she brings depth to every appointment.</p>
+          <div class="team-tags">
+            <span class="team-tag">Olaplex</span>
+            <span class="team-tag">Cut &amp; Restyle</span>
+            <span class="team-tag">Treatments</span>
+          </div>
+          <a href="book.html" class="btn-ghost">Book with Megan →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── GALLERY ── -->
+  <section class="gallery-section" id="gallery">
+    <div class="gallery-head">
+      <div>
+        <span class="label">Our Work</span>
+        <h2 class="section-heading reveal">The <em>results.</em></h2>
+      </div>
+      <a href="#" class="nav-link" style="margin-right:52px; color:var(--muted);">@lemonadehairswansea</a>
+    </div>
+    <div class="gallery-viewport">
+      <div class="gallery-reel">
+        <!-- Original set -->
+        <div class="g-item"><img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=400&h=534&q=80" alt="Hair gallery" /></div>
+        <div class="g-item"><img src="https://images.pexels.com/photos/3065209/pexels-photo-3065209.jpeg?auto=compress&cs=tinysrgb&w=400&h=534&fit=crop" alt="Hair gallery" /></div>
+        <div class="g-item"><img src="https://images.unsplash.com/photo-1523263685509-57c1d050d19b?auto=format&fit=crop&w=400&h=534&q=80" alt="Hair gallery" /></div>
+        <div class="g-item"><img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=400&h=534&q=80" alt="Hair gallery" /></div>
+        <div class="g-item"><img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=400&h=534&q=80" alt="Hair gallery" /></div>
+        <div class="g-item"><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=400&h=534&q=80" alt="Hair gallery" /></div>
+        <!-- Duplicate set for seamless loop -->
+        <div class="g-item"><img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=400&h=534&q=80" alt="Hair gallery" /></div>
+        <div class="g-item"><img src="https://images.pexels.com/photos/3065209/pexels-photo-3065209.jpeg?auto=compress&cs=tinysrgb&w=400&h=534&fit=crop" alt="Hair gallery" /></div>
+        <div class="g-item"><img src="https://images.unsplash.com/photo-1523263685509-57c1d050d19b?auto=format&fit=crop&w=400&h=534&q=80" alt="Hair gallery" /></div>
+        <div class="g-item"><img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=400&h=534&q=80" alt="Hair gallery" /></div>
+        <div class="g-item"><img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=400&h=534&q=80" alt="Hair gallery" /></div>
+        <div class="g-item"><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=400&h=534&q=80" alt="Hair gallery" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── REVIEWS ── -->
+  <section class="reviews-section" id="reviews">
+    <div class="reviews-head">
+      <div>
+        <span class="label reveal">Client Stories</span>
+        <h2 class="section-heading reveal d1">What they <em>say.</em></h2>
+      </div>
+      <a href="reviews.html" class="view-all reveal d2">All Reviews →</a>
+    </div>
+    <div class="reviews-grid">
+
+      <div class="r-card reveal d1">
+        <div class="r-stars">
+          <span class="r-star"></span><span class="r-star"></span><span class="r-star"></span><span class="r-star"></span><span class="r-star"></span>
+        </div>
+        <p class="r-text">"I've been coming to Lemonade for over a year and the consistency is unreal. My balayage always looks exactly how I picture it. Everyone I've recommended has become a regular too."</p>
+        <div class="r-divider"></div>
+        <span class="r-name">Sophie M.</span>
+        <span class="r-detail">Balayage &amp; Toner</span>
+      </div>
+
+      <div class="r-card reveal d2">
+        <div class="r-stars">
+          <span class="r-star"></span><span class="r-star"></span><span class="r-star"></span><span class="r-star"></span><span class="r-star"></span>
+        </div>
+        <p class="r-text">"Came in for a colour correction after a bad experience elsewhere — honestly the best decision I made. They took their time, explained everything, and the result was stunning."</p>
+        <div class="r-divider"></div>
+        <span class="r-name">Chloe R.</span>
+        <span class="r-detail">Colour Correction</span>
+      </div>
+
+      <div class="r-card reveal d3">
+        <div class="r-stars">
+          <span class="r-star"></span><span class="r-star"></span><span class="r-star"></span><span class="r-star"></span><span class="r-star"></span>
+        </div>
+        <p class="r-text">"The atmosphere is so calm and the team genuinely love what they do. My cut was precise — not a hair out of place. I left feeling like a completely different person."</p>
+        <div class="r-divider"></div>
+        <span class="r-name">Amara T.</span>
+        <span class="r-detail">Cut &amp; Blow Dry</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="cta-section" id="book">
+    <!-- Ethereal shadow background -->
+    <div class="etheral-bg">
+      <svg class="es-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+        <defs>
+          <filter id="esf-cta" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.006 0.004" numOctaves="3" seed="14" result="noise"/>
+            <feColorMatrix class="es-matrix" in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  5 0 0 0 -4" result="alpha-noise"/>
+            <feFlood flood-color="#c8920a" flood-opacity="0.55" result="amber"/>
+            <feComposite in="amber" in2="alpha-noise" operator="in" result="colored"/>
+            <feGaussianBlur in="colored" stdDeviation="18"/>
+          </filter>
+        </defs>
+        <rect width="100%" height="100%" filter="url(#esf-cta)"/>
+      </svg>
+    </div>
+    <div class="es-content" style="align-items:center">
+      <span class="label" style="display:block;text-align:center;margin-bottom:20px;">Ready?</span>
+      <h2 class="cta-heading reveal">
+        Your best hair<br>
+        starts <em>here.</em>
+      </h2>
+      <p class="cta-sub reveal d1">Book your appointment at Lemonade Hair, Swansea</p>
+      <a href="book.html" class="btn-cta reveal d2"><span>Book Your Appointment</span></a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="f-brand-name">Lemonade</div>
+        <span class="f-brand-sub">Hair Swansea</span>
+        <p class="f-brand-text">
+          A women's hair studio in the heart of Swansea, built on precision, craft, and the belief that great hair changes everything.
+        </p>
+      </div>
+      <div class="f-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Colour</a></li>
+          <li><a href="#">Cut &amp; Style</a></li>
+          <li><a href="#">Balayage</a></li>
+          <li><a href="#">Treatments</a></li>
+          <li><a href="#">Extensions</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="team.html">Our Team</a></li>
+          <li><a href="#">Gift Cards</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Visit Us</h4>
+        <address>
+          Swansea, Wales<br>
+          Tue – Fri: 9am – 6pm<br>
+          Thu: 9am – 7pm<br>
+          Sat: 9am – 3pm<br>
+          Mon &amp; Sun: Closed<br><br>
+          <a href="book.html" style="color:var(--gold);text-decoration:none;">Book Online</a>
+        </address>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <p>© 2025 Lemonade Hair Swansea. All rights reserved.</p>
+      <div class="socials">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Cursor
+    const cur = document.getElementById('cur');
+    const curF = document.getElementById('cur-f');
+    let mx = 0, my = 0, fx = 0, fy = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+    });
+    (function loop() {
+      fx += (mx - fx) * .12; fy += (my - fy) * .12;
+      curF.style.left = fx + 'px'; curF.style.top = fy + 'px';
+      requestAnimationFrame(loop);
+    })();
+
+    // ── Nav scroll
+    const nav = document.getElementById('nav');
+    addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', scrollY > 55);
+    });
+
+    // ── Hero bg parallax + zoom
+    const heroBg = document.getElementById('heroBg');
+    setTimeout(() => heroBg.classList.add('zoomed'), 80);
+    addEventListener('scroll', () => {
+      if (scrollY < innerHeight)
+        heroBg.style.transform = `scale(1.0) translateY(${scrollY * .28}px)`;
+    });
+
+    // ── Reveal on scroll
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+    }, { threshold: 0, rootMargin: '0px 0px 60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // ── Ethereal shadow animation
+    // fractalNoise R/G/B channels are spatially independent; cycling which channel
+    // feeds the alpha mask causes the visible patches to shift position → real motion.
+    // Softmax-normalized weights → sum always = 1, so threshold bias stays constant.
+    const esMatrices = document.querySelectorAll('.es-matrix');
+    let esT = 0;
+    const esP = Math.PI * 2 / 3; // 120° phase offset between channels
+    const esScale = 5, esBias = -4; // threshold: values > 0.8 contribute
+    (function esFrame() {
+      esT += 0.006; // ~17 s per full cycle
+      const e1 = Math.exp(2.2 * Math.cos(esT));
+      const e2 = Math.exp(2.2 * Math.cos(esT + esP));
+      const e3 = Math.exp(2.2 * Math.cos(esT + esP * 2));
+      const es = e1 + e2 + e3;
+      const wr = e1 / es, wg = e2 / es, wb = e3 / es;
+      const m = `0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  ${(esScale*wr).toFixed(4)} ${(esScale*wg).toFixed(4)} ${(esScale*wb).toFixed(4)} 0 ${esBias}`;
+      esMatrices.forEach(el => el.setAttribute('values', m));
+      requestAnimationFrame(esFrame);
+    })();
+
+    // ── Services Carousel
+    const sCards = Array.from(document.querySelectorAll('.s-card'));
+    const sDots  = Array.from(document.querySelectorAll('.s-dot'));
+    const sTotal = sCards.length;
+    let sIdx = 0;
+
+    function renderSrv() {
+      sCards.forEach((card, i) => {
+        const offset = (i - sIdx + sTotal) % sTotal;
+        card.className = 's-card';
+        if (offset === 0)          card.classList.add('is-active');
+        else if (offset === 1)     card.classList.add('is-next');
+        else if (offset === sTotal - 1) card.classList.add('is-prev');
+        else                       card.classList.add('is-hidden');
+      });
+      sDots.forEach((d, i) => d.classList.toggle('active', i === sIdx));
+    }
+
+    document.getElementById('srvPrev').addEventListener('click', () => {
+      sIdx = (sIdx - 1 + sTotal) % sTotal; renderSrv();
+    });
+    document.getElementById('srvNext').addEventListener('click', () => {
+      sIdx = (sIdx + 1) % sTotal; renderSrv();
+    });
+    // Clicking prev/next cards also navigates
+    document.getElementById('srvStage').addEventListener('click', e => {
+      const card = e.target.closest('.s-card');
+      if (!card) return;
+      if (card.classList.contains('is-next')) { sIdx = (sIdx + 1) % sTotal; renderSrv(); }
+      else if (card.classList.contains('is-prev')) { sIdx = (sIdx - 1 + sTotal) % sTotal; renderSrv(); }
+    });
+    sDots.forEach(d => d.addEventListener('click', () => {
+      sIdx = +d.dataset.dot; renderSrv();
+    }));
+    renderSrv();
+  </script>
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Reviews — Lemonade Hair Swansea</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="brand.css">
+  <style>
+    /* ── REVIEWS HERO ── */
+    .reviews-hero {
+      min-height: 58vh;
+      background: var(--bg-deep);
+      display: flex; align-items: flex-end;
+      padding: 140px 52px 88px;
+      position: relative; overflow: hidden;
+    }
+    .reviews-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 65% 55% at 65% 100%, rgba(200,168,75,.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-deco-q {
+      position: absolute; left: 52px; top: 80px;
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(200px, 22vw, 360px);
+      font-weight: 300; font-style: italic;
+      color: rgba(200,168,75,.04); line-height: 1;
+      pointer-events: none; user-select: none;
+    }
+    .reviews-hero-content { position: relative; z-index: 1; }
+
+    /* ── SUMMARY BAR ── */
+    .summary-bar {
+      background: var(--bg-mid);
+      border-top: 1px solid rgba(200,168,75,.1);
+      border-bottom: 1px solid rgba(200,168,75,.1);
+      padding: 48px 52px;
+      display: flex; align-items: center; justify-content: center; gap: 0;
+    }
+    .sum-item { flex: 1; text-align: center; padding: 0 52px; }
+    .sum-item + .sum-item { border-left: 1px solid rgba(200,168,75,.14); }
+    .sum-big {
+      font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300;
+      color: var(--gold-light); line-height: 1; display: block; margin-bottom: 8px;
+    }
+    .sum-stars { display: flex; justify-content: center; gap: 5px; margin: 6px 0 10px; }
+    .sum-label {
+      font-size: 9.5px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase;
+      color: var(--muted); display: block;
+    }
+    .sum-source {
+      font-size: 10px; letter-spacing: .06em; color: rgba(112,107,98,.55);
+      margin-top: 6px; display: block;
+    }
+
+    /* ── SCROLLING TESTIMONIALS ── */
+    .testimonials-section {
+      padding: 100px 52px 112px;
+      background: var(--bg-deep);
+    }
+    .testimonials-head { margin-bottom: 52px; }
+    @keyframes scrollUp {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+    .t-cols-wrap {
+      display: flex; gap: 20px;
+      max-height: 720px; overflow: hidden;
+      -webkit-mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+      mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+    }
+    .t-col { flex: 1; min-width: 0; }
+    .t-col--md { display: none; }
+    .t-col--lg { display: none; }
+    @media (min-width: 768px)  { .t-col--md { display: block; } }
+    @media (min-width: 1024px) { .t-col--lg { display: block; } }
+    .t-track {
+      display: flex; flex-direction: column; gap: 16px;
+      animation: scrollUp linear infinite;
+    }
+    .t-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(200,168,75,.09);
+      padding: 24px 22px 20px;
+      position: relative; overflow: hidden;
+      transition: border-color .3s;
+    }
+    .t-card:hover { border-color: rgba(200,168,75,.22); }
+    .t-card::before {
+      content: '\201C'; position: absolute; top: -8px; right: 14px;
+      font-family: 'Cormorant Garamond', serif; font-size: 80px; font-weight: 300; font-style: italic;
+      color: rgba(200,168,75,.06); line-height: 1; pointer-events: none; user-select: none;
+    }
+    .t-service-tag {
+      display: inline-block; font-size: 8.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+      color: rgba(200,168,75,.65); border: 1px solid rgba(200,168,75,.18); padding: 3px 8px; margin-bottom: 12px;
+    }
+    .t-stars { display: flex; gap: 3px; margin-bottom: 10px; }
+    .t-star {
+      width: 10px; height: 10px; display: inline-block; background: var(--gold);
+      clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);
+    }
+    .t-text {
+      font-size: 12.5px; line-height: 1.75; color: var(--secondary); margin-bottom: 16px;
+    }
+    .t-meta {
+      display: flex; align-items: center; gap: 10px;
+      padding-top: 14px; border-top: 1px solid rgba(200,168,75,.08);
+    }
+    .t-avatar { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; filter: grayscale(20%); flex-shrink: 0; }
+    .t-name { font-size: 11px; font-weight: 600; color: var(--white); letter-spacing: .04em; }
+    .t-role { font-size: 10px; color: var(--muted); letter-spacing: .03em; margin-top: 1px; }
+
+    /* ── PLATFORM BADGES ── */
+    .platform-strip {
+      background: var(--bg-mid);
+      border-top: 1px solid rgba(200,168,75,.08);
+      padding: 56px 52px;
+      text-align: center;
+    }
+    .platform-label {
+      font-size: 10px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 36px; display: block;
+    }
+    .platform-badges {
+      display: flex; justify-content: center; gap: 48px; align-items: center;
+    }
+    .platform-badge {
+      display: flex; align-items: center; gap: 14px;
+      padding: 20px 32px;
+      border: 1px solid rgba(200,168,75,.14);
+      background: var(--bg-card);
+      text-decoration: none;
+      transition: border-color .3s;
+    }
+    .platform-badge:hover { border-color: rgba(200,168,75,.3); }
+    .badge-icon {
+      font-size: 22px; line-height: 1;
+    }
+    .badge-text { text-align: left; }
+    .badge-name {
+      font-size: 10px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--white); display: block;
+    }
+    .badge-rating {
+      font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300;
+      color: var(--gold-light);
+    }
+    .badge-count {
+      font-size: 11px; color: var(--muted); margin-left: 6px; letter-spacing: .04em;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="cur"></div>
+  <div id="cur-f"></div>
+
+  <!-- ── NAV ── -->
+  <nav id="nav">
+    <div class="nav-links">
+      <a href="index.html#services" class="nav-link">Services</a>
+      <a href="index.html#about"    class="nav-link">Our Studio</a>
+      <a href="team.html"           class="nav-link">Our Team</a>
+    </div>
+    <a href="index.html" class="nav-logo">
+      Lemonade
+      <small>Hair Swansea</small>
+    </a>
+    <div class="nav-links" style="justify-content:flex-end;">
+      <a href="gallery.html" class="nav-link">Gallery</a>
+      <a href="reviews.html" class="nav-link active">Reviews</a>
+      <a href="book.html"    class="btn-nav">Book Now</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="reviews-hero">
+    <div class="reviews-hero-content">
+      <span class="page-hero-eyebrow">Client Stories</span>
+      <h1 class="page-hero-heading">What they <em>say.</em></h1>
+      <p class="page-hero-sub">Every review is from a verified Lemonade Hair client. Real words, real results.</p>
+    </div>
+  </section>
+
+  <!-- ── SUMMARY BAR ── -->
+  <div class="summary-bar">
+    <div class="sum-item reveal">
+      <span class="sum-big">5.0</span>
+      <div class="sum-stars">
+        <span class="r-star"></span><span class="r-star"></span><span class="r-star"></span><span class="r-star"></span><span class="r-star"></span>
+      </div>
+      <span class="sum-label">Average Rating</span>
+      <span class="sum-source">Google &amp; Facebook</span>
+    </div>
+    <div class="sum-item reveal d1">
+      <span class="sum-big">85+</span>
+      <span class="sum-label" style="margin-top:14px;">Verified Reviews</span>
+      <span class="sum-source">Across all platforms</span>
+    </div>
+    <div class="sum-item reveal d2">
+      <span class="sum-big">100%</span>
+      <span class="sum-label" style="margin-top:14px;">5-Star Reviews</span>
+      <span class="sum-source">No exceptions</span>
+    </div>
+  </div>
+
+  <!-- ── SCROLLING TESTIMONIALS ── -->
+  <section class="testimonials-section">
+    <div class="testimonials-head">
+      <span class="label reveal">All Reviews</span>
+      <h2 class="section-heading reveal d1">From our <em>clients.</em></h2>
+    </div>
+
+    <div class="t-cols-wrap">
+
+      <!-- Column 1 — 15s -->
+      <div class="t-col">
+        <div class="t-track" style="animation-duration:15s">
+          <!-- Original set -->
+          <div class="t-card">
+            <span class="t-service-tag">Balayage &amp; Toner</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"I've been coming to Lemonade for over a year and the consistency is unreal. My balayage always looks exactly how I picture it. Everyone I've recommended has become a regular too."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/1.jpg" alt=""><div><div class="t-name">Sophie M.</div><div class="t-role">March 2025</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Olaplex Treatment</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"My hair hadn't felt this healthy in years. Megan was incredible — so knowledgeable about the science of what she was doing. I could actually feel the difference the same day."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/4.jpg" alt=""><div><div class="t-name">Rhiannon J.</div><div class="t-role">December 2024</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Balayage</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"This is the third salon I'd tried for balayage and Lemonade is simply on another level. The blending is so natural and Cerys just gets what I'm going for without a long explanation."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/7.jpg" alt=""><div><div class="t-name">Naomi W.</div><div class="t-role">September 2024</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Extensions</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"My extensions look completely natural — I've had compliments from people who genuinely don't believe they're not my real hair. The colour match was perfect."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/10.jpg" alt=""><div><div class="t-name">Gemma C.</div><div class="t-role">June 2024</div></div></div>
+          </div>
+          <!-- Duplicate for seamless loop -->
+          <div class="t-card">
+            <span class="t-service-tag">Balayage &amp; Toner</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"I've been coming to Lemonade for over a year and the consistency is unreal. My balayage always looks exactly how I picture it. Everyone I've recommended has become a regular too."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/1.jpg" alt=""><div><div class="t-name">Sophie M.</div><div class="t-role">March 2025</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Olaplex Treatment</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"My hair hadn't felt this healthy in years. Megan was incredible — so knowledgeable about the science of what she was doing. I could actually feel the difference the same day."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/4.jpg" alt=""><div><div class="t-name">Rhiannon J.</div><div class="t-role">December 2024</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Balayage</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"This is the third salon I'd tried for balayage and Lemonade is simply on another level. The blending is so natural and Cerys just gets what I'm going for without a long explanation."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/7.jpg" alt=""><div><div class="t-name">Naomi W.</div><div class="t-role">September 2024</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Extensions</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"My extensions look completely natural — I've had compliments from people who genuinely don't believe they're not my real hair. The colour match was perfect."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/10.jpg" alt=""><div><div class="t-name">Gemma C.</div><div class="t-role">June 2024</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 2 — 19s, hidden on mobile -->
+      <div class="t-col t-col--md">
+        <div class="t-track" style="animation-duration:19s">
+          <!-- Original set -->
+          <div class="t-card">
+            <span class="t-service-tag">Colour Correction</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"Came in for a colour correction after a bad experience elsewhere — honestly the best decision I made. They took their time, explained everything, and the result was stunning."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/2.jpg" alt=""><div><div class="t-name">Chloe R.</div><div class="t-role">February 2025</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Highlights</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"Came in nervous about going lighter. Cerys totally put me at ease, talked me through exactly what she'd do, and the result is exactly what I wanted. Will absolutely be back."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/5.jpg" alt=""><div><div class="t-name">Katie P.</div><div class="t-role">November 2024</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Cut &amp; Style</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"Booked in for a big chop — best thing I ever did. The whole team cheered when I said I was going short. Felt so supported. Genuinely one of the nicest salon experiences I've had."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/8.jpg" alt=""><div><div class="t-name">Beth H.</div><div class="t-role">August 2024</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Colour Correction</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"I was honestly in tears when I arrived — my hair was in such a state. I left absolutely beaming. They really do care about the outcome, not just getting you in and out."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/11.jpg" alt=""><div><div class="t-name">Jade O.</div><div class="t-role">May 2024</div></div></div>
+          </div>
+          <!-- Duplicate for seamless loop -->
+          <div class="t-card">
+            <span class="t-service-tag">Colour Correction</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"Came in for a colour correction after a bad experience elsewhere — honestly the best decision I made. They took their time, explained everything, and the result was stunning."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/2.jpg" alt=""><div><div class="t-name">Chloe R.</div><div class="t-role">February 2025</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Highlights</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"Came in nervous about going lighter. Cerys totally put me at ease, talked me through exactly what she'd do, and the result is exactly what I wanted. Will absolutely be back."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/5.jpg" alt=""><div><div class="t-name">Katie P.</div><div class="t-role">November 2024</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Cut &amp; Style</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"Booked in for a big chop — best thing I ever did. The whole team cheered when I said I was going short. Felt so supported. Genuinely one of the nicest salon experiences I've had."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/8.jpg" alt=""><div><div class="t-name">Beth H.</div><div class="t-role">August 2024</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Colour Correction</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"I was honestly in tears when I arrived — my hair was in such a state. I left absolutely beaming. They really do care about the outcome, not just getting you in and out."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/11.jpg" alt=""><div><div class="t-name">Jade O.</div><div class="t-role">May 2024</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 3 — 17s, hidden on mobile & tablet -->
+      <div class="t-col t-col--lg">
+        <div class="t-track" style="animation-duration:17s">
+          <!-- Original set -->
+          <div class="t-card">
+            <span class="t-service-tag">Cut &amp; Blow Dry</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"The atmosphere is so calm and the team genuinely love what they do. My cut was precise — not a hair out of place. I left feeling like a completely different person."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/3.jpg" alt=""><div><div class="t-name">Amara T.</div><div class="t-role">January 2025</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Full Colour</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"The studio feels so calm and considered. They never rush you — you genuinely feel like the only client there. The colour result was beautiful and lasted so well."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/6.jpg" alt=""><div><div class="t-name">Ffion B.</div><div class="t-role">October 2024</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Toner &amp; Gloss</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"My colour had gone brassy and they sorted it completely in one visit. Fast, confident, skilled — and such a friendly atmosphere. Already booked my next appointment before I left."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/9.jpg" alt=""><div><div class="t-name">Lowri E.</div><div class="t-role">July 2024</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Full Balayage</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"I drive from Cardiff for every appointment and I will continue to do so. Genuinely worth every mile. The quality here is something I haven't found anywhere else in South Wales."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/12.jpg" alt=""><div><div class="t-name">Siân D.</div><div class="t-role">April 2024</div></div></div>
+          </div>
+          <!-- Duplicate for seamless loop -->
+          <div class="t-card">
+            <span class="t-service-tag">Cut &amp; Blow Dry</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"The atmosphere is so calm and the team genuinely love what they do. My cut was precise — not a hair out of place. I left feeling like a completely different person."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/3.jpg" alt=""><div><div class="t-name">Amara T.</div><div class="t-role">January 2025</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Full Colour</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"The studio feels so calm and considered. They never rush you — you genuinely feel like the only client there. The colour result was beautiful and lasted so well."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/6.jpg" alt=""><div><div class="t-name">Ffion B.</div><div class="t-role">October 2024</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Toner &amp; Gloss</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"My colour had gone brassy and they sorted it completely in one visit. Fast, confident, skilled — and such a friendly atmosphere. Already booked my next appointment before I left."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/9.jpg" alt=""><div><div class="t-name">Lowri E.</div><div class="t-role">July 2024</div></div></div>
+          </div>
+          <div class="t-card">
+            <span class="t-service-tag">Full Balayage</span>
+            <div class="t-stars"><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span><span class="t-star"></span></div>
+            <p class="t-text">"I drive from Cardiff for every appointment and I will continue to do so. Genuinely worth every mile. The quality here is something I haven't found anywhere else in South Wales."</p>
+            <div class="t-meta"><img class="t-avatar" src="https://randomuser.me/api/portraits/women/12.jpg" alt=""><div><div class="t-name">Siân D.</div><div class="t-role">April 2024</div></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── PLATFORM BADGES ── -->
+  <div class="platform-strip">
+    <span class="platform-label">Find us on</span>
+    <div class="platform-badges">
+      <a href="#" class="platform-badge">
+        <span class="badge-icon">G</span>
+        <div class="badge-text">
+          <span class="badge-name">Google Reviews</span>
+          <span class="badge-rating">5.0 <span class="badge-count">· 60+ reviews</span></span>
+        </div>
+      </a>
+      <a href="#" class="platform-badge">
+        <span class="badge-icon">f</span>
+        <div class="badge-text">
+          <span class="badge-name">Facebook Reviews</span>
+          <span class="badge-rating">5.0 <span class="badge-count">· 25+ reviews</span></span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── CTA ── -->
+  <section class="cta-section">
+    <div class="es-content" style="align-items:center;">
+      <span class="label" style="display:block;text-align:center;margin-bottom:20px;">Inspired?</span>
+      <h2 class="cta-heading reveal">
+        Ready for results<br>like <em>these?</em>
+      </h2>
+      <p class="cta-sub reveal d1">Book your appointment at Lemonade Hair, Swansea</p>
+      <a href="book.html" class="btn-cta reveal d2"><span>Book Your Appointment</span></a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="f-brand-name">Lemonade</div>
+        <span class="f-brand-sub">Hair Swansea</span>
+        <p class="f-brand-text">A women's hair studio in the heart of Swansea, built on precision, craft, and the belief that great hair changes everything.</p>
+      </div>
+      <div class="f-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="index.html#services">Colour</a></li>
+          <li><a href="index.html#services">Cut &amp; Style</a></li>
+          <li><a href="index.html#services">Balayage</a></li>
+          <li><a href="index.html#services">Treatments</a></li>
+          <li><a href="index.html#services">Extensions</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="index.html#about">Our Story</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="team.html">Our Team</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Visit Us</h4>
+        <address>
+          Swansea, Wales<br>
+          Tue – Fri: 9am – 6pm<br>
+          Thu: 9am – 7pm<br>
+          Sat: 9am – 3pm<br>
+          Mon &amp; Sun: Closed<br><br>
+          <a href="book.html" style="color:var(--gold);text-decoration:none;">Book Online</a>
+        </address>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <p>© 2025 Lemonade Hair Swansea. All rights reserved.</p>
+      <div class="socials">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="brand.js"></script>
+</body>
+</html>

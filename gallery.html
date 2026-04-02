@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery — Lemonade Hair Swansea</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="brand.css">
+  <style>
+    /* ── GALLERY HERO ── */
+    .gallery-hero {
+      min-height: 55vh; background: var(--bg-deep);
+      display: flex; align-items: flex-end;
+      padding: 140px 52px 72px;
+      position: relative; overflow: hidden;
+    }
+    .gallery-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 55% 50% at 80% 100%, rgba(200,168,75,.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .gallery-hero-deco {
+      position: absolute; right: -1vw; top: 40%; transform: translateY(-50%);
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(180px, 20vw, 340px);
+      font-weight: 300; font-style: italic;
+      color: rgba(200,168,75,.04); line-height: 1;
+      pointer-events: none; user-select: none;
+    }
+    .gallery-hero-content { position: relative; z-index: 1; }
+
+    /* ── FILTER BAR ── */
+    .filter-bar-wrap {
+      position: sticky; top: 0; z-index: 150;
+      background: var(--bg-dark);
+      border-bottom: 1px solid rgba(200,168,75,.12);
+    }
+    .filter-bar {
+      display: flex; gap: 0; padding: 0 52px;
+    }
+    .filter-btn {
+      font-size: 10px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--muted); padding: 20px 28px;
+      border: none; border-bottom: 2px solid transparent;
+      background: none; cursor: none;
+      transition: color .3s, border-color .3s;
+    }
+    .filter-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .filter-btn:hover:not(.active) { color: var(--white); }
+    .filter-count {
+      font-size: 9px; color: var(--muted); margin-left: 6px;
+      opacity: .6;
+    }
+
+    /* ── MASONRY GRID ── */
+    .masonry-section {
+      padding: 64px 52px 96px;
+      background: var(--bg-deep);
+    }
+    .masonry-grid {
+      columns: 3;
+      column-gap: 16px;
+    }
+    .g-full-item {
+      break-inside: avoid;
+      margin-bottom: 16px;
+      overflow: hidden;
+      position: relative;
+      cursor: none;
+      display: block;
+    }
+    .g-full-item.hidden { display: none; }
+    .g-full-item img {
+      width: 100%; display: block;
+      filter: grayscale(25%);
+      transition: transform .65s ease, filter .45s;
+    }
+    .g-full-item:hover img { transform: scale(1.05); filter: grayscale(0%); }
+    .g-full-item::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,8,7,.6) 0%, transparent 50%);
+      opacity: 0; transition: opacity .4s;
+    }
+    .g-full-item:hover::after { opacity: 1; }
+    .g-item-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 18px 22px; z-index: 2;
+      opacity: 0; transform: translateY(6px);
+      transition: opacity .35s, transform .35s;
+    }
+    .g-full-item:hover .g-item-overlay { opacity: 1; transform: translateY(0); }
+    .g-item-label {
+      font-size: 9.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold);
+    }
+    .g-item-zoom {
+      font-size: 18px; color: rgba(200,168,75,.6);
+      position: absolute; top: 16px; right: 16px;
+      opacity: 0; transition: opacity .3s;
+    }
+    .g-full-item:hover .g-item-zoom { opacity: 1; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 8500;
+      background: rgba(8,8,7,.96);
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-inner {
+      position: relative; max-width: 82vw; max-height: 90vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-img {
+      max-width: 100%; max-height: 90vh;
+      object-fit: contain;
+      box-shadow: 0 32px 80px rgba(0,0,0,.7);
+    }
+    .lightbox-label {
+      position: absolute; bottom: -36px; left: 0;
+      font-size: 9.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gold);
+    }
+    .lightbox-close {
+      position: fixed; top: 36px; right: 52px;
+      font-size: 10px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--muted); cursor: none; text-decoration: none;
+      transition: color .3s; background: none; border: none; padding: 8px;
+    }
+    .lightbox-close:hover { color: var(--gold); }
+    .lightbox-nav {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      background: rgba(200,168,75,.08); border: 1px solid rgba(200,168,75,.2);
+      color: var(--gold); font-size: 20px; cursor: none;
+      width: 52px; height: 52px;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .3s;
+    }
+    .lightbox-nav:hover { background: rgba(200,168,75,.2); }
+    .lightbox-prev { left: 32px; }
+    .lightbox-next { right: 32px; }
+
+    /* ── INSTAGRAM STRIP ── */
+    .insta-strip {
+      background: var(--bg-mid);
+      border-top: 1px solid rgba(200,168,75,.1);
+      padding: 64px 52px;
+      text-align: center;
+    }
+    .insta-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px; font-weight: 300; font-style: italic;
+      color: var(--white); margin-bottom: 16px;
+    }
+    .insta-handle {
+      font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--gold); text-decoration: none;
+      border-bottom: 1px solid rgba(200,168,75,.3); padding-bottom: 3px;
+      transition: color .3s, border-color .3s;
+    }
+    .insta-handle:hover { color: var(--gold-light); border-color: var(--gold-light); }
+  </style>
+</head>
+<body>
+
+  <div id="cur"></div>
+  <div id="cur-f"></div>
+
+  <!-- ── NAV ── -->
+  <nav id="nav">
+    <div class="nav-links">
+      <a href="index.html#services" class="nav-link">Services</a>
+      <a href="index.html#about"    class="nav-link">Our Studio</a>
+      <a href="team.html"           class="nav-link">Our Team</a>
+    </div>
+    <a href="index.html" class="nav-logo">
+      Lemonade
+      <small>Hair Swansea</small>
+    </a>
+    <div class="nav-links" style="justify-content:flex-end;">
+      <a href="gallery.html" class="nav-link active">Gallery</a>
+      <a href="reviews.html" class="nav-link">Reviews</a>
+      <a href="book.html"    class="btn-nav">Book Now</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="gallery-hero">
+    <div class="gallery-hero-content">
+      <span class="page-hero-eyebrow">Our Work</span>
+      <h1 class="page-hero-heading">The <em>results.</em></h1>
+      <p class="page-hero-sub">A curated selection of colour, cuts and transformations from the studio. Every image is from a real Lemonade Hair client.</p>
+    </div>
+  </section>
+
+  <!-- ── FILTER BAR ── -->
+  <div class="filter-bar-wrap">
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All <span class="filter-count">18</span></button>
+      <button class="filter-btn" data-filter="colour">Colour <span class="filter-count">5</span></button>
+      <button class="filter-btn" data-filter="balayage">Balayage <span class="filter-count">4</span></button>
+      <button class="filter-btn" data-filter="cuts">Cuts <span class="filter-count">5</span></button>
+      <button class="filter-btn" data-filter="treatments">Treatments <span class="filter-count">4</span></button>
+    </div>
+  </div>
+
+  <!-- ── MASONRY GRID ── -->
+  <section class="masonry-section">
+    <div class="masonry-grid" id="masonryGrid">
+
+      <div class="g-full-item" data-category="balayage" data-src="https://images.pexels.com/photos/3065171/pexels-photo-3065171.jpeg?auto=compress&cs=tinysrgb&w=900&q=80" data-label="Balayage">
+        <img src="https://images.pexels.com/photos/3065171/pexels-photo-3065171.jpeg?auto=compress&cs=tinysrgb&w=700&q=80" alt="Balayage" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Balayage</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+      <div class="g-full-item" data-category="colour" data-src="https://images.pexels.com/photos/3065209/pexels-photo-3065209.jpeg?auto=compress&cs=tinysrgb&w=900&q=80" data-label="Colour">
+        <img src="https://images.pexels.com/photos/3065209/pexels-photo-3065209.jpeg?auto=compress&cs=tinysrgb&w=700&q=80" alt="Colour" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Colour</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+      <div class="g-full-item" data-category="cuts" data-src="https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=900&q=80" data-label="Cut &amp; Blow Dry">
+        <img src="https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=700&q=80" alt="Cut & Blow Dry" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Cut &amp; Blow Dry</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+      <div class="g-full-item" data-category="cuts" data-src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=900&q=80" data-label="Cut &amp; Style">
+        <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=700&q=80" alt="Cut & Style" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Cut &amp; Style</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+      <div class="g-full-item" data-category="treatments" data-src="https://images.unsplash.com/photo-1523263685509-57c1d050d19b?auto=format&fit=crop&w=900&q=80" data-label="Olaplex Treatment">
+        <img src="https://images.unsplash.com/photo-1523263685509-57c1d050d19b?auto=format&fit=crop&w=700&q=80" alt="Olaplex Treatment" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Olaplex Treatment</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+      <div class="g-full-item" data-category="balayage" data-src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=900&q=80" data-label="Balayage">
+        <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=700&q=80" alt="Balayage" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Balayage</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+      <div class="g-full-item" data-category="colour" data-src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=900&q=80" data-label="Highlights">
+        <img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=700&q=80" alt="Highlights" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Highlights</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+      <div class="g-full-item" data-category="colour" data-src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=900&q=80" data-label="Full Colour">
+        <img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=700&q=80" alt="Full Colour" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Full Colour</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+      <div class="g-full-item" data-category="treatments" data-src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=900&q=80" data-label="Treatment">
+        <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=700&q=80" alt="Treatment" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Treatment</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+      <div class="g-full-item" data-category="balayage" data-src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=900&q=80" data-label="Balayage">
+        <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=700&q=80" alt="Balayage" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Balayage</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+      <div class="g-full-item" data-category="cuts" data-src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=900&q=80" data-label="Restyle">
+        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=700&q=80" alt="Restyle" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Restyle</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+      <div class="g-full-item" data-category="treatments" data-src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" data-label="Olaplex">
+        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=700&q=80" alt="Olaplex" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Olaplex</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+      <div class="g-full-item" data-category="colour" data-src="https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=900&q=80" data-label="Toner &amp; Gloss">
+        <img src="https://images.pexels.com/photos/3993444/pexels-photo-3993444.jpeg?auto=compress&cs=tinysrgb&w=700&q=80" alt="Toner & Gloss" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Toner &amp; Gloss</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+      <div class="g-full-item" data-category="cuts" data-src="https://images.pexels.com/photos/3065226/pexels-photo-3065226.jpeg?auto=compress&cs=tinysrgb&w=900&q=80" data-label="Blow Dry">
+        <img src="https://images.pexels.com/photos/3065226/pexels-photo-3065226.jpeg?auto=compress&cs=tinysrgb&w=700&q=80" alt="Blow Dry" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Blow Dry</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+      <div class="g-full-item" data-category="balayage" data-src="https://images.pexels.com/photos/1322716/pexels-photo-1322716.jpeg?auto=compress&cs=tinysrgb&w=900&q=80" data-label="Sun-kissed Balayage">
+        <img src="https://images.pexels.com/photos/1322716/pexels-photo-1322716.jpeg?auto=compress&cs=tinysrgb&w=700&q=80" alt="Sun-kissed Balayage" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Sun-kissed Balayage</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+      <div class="g-full-item" data-category="treatments" data-src="https://images.pexels.com/photos/3992874/pexels-photo-3992874.jpeg?auto=compress&cs=tinysrgb&w=900&q=80" data-label="Hair Treatment">
+        <img src="https://images.pexels.com/photos/3992874/pexels-photo-3992874.jpeg?auto=compress&cs=tinysrgb&w=700&q=80" alt="Hair Treatment" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Hair Treatment</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+      <div class="g-full-item" data-category="colour" data-src="https://images.pexels.com/photos/3065179/pexels-photo-3065179.jpeg?auto=compress&cs=tinysrgb&w=900&q=80" data-label="Colour &amp; Toner">
+        <img src="https://images.pexels.com/photos/3065179/pexels-photo-3065179.jpeg?auto=compress&cs=tinysrgb&w=700&q=80" alt="Colour & Toner" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Colour &amp; Toner</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+      <div class="g-full-item" data-category="cuts" data-src="https://images.pexels.com/photos/3065177/pexels-photo-3065177.jpeg?auto=compress&cs=tinysrgb&w=900&q=80" data-label="Precision Cut">
+        <img src="https://images.pexels.com/photos/3065177/pexels-photo-3065177.jpeg?auto=compress&cs=tinysrgb&w=700&q=80" alt="Precision Cut" loading="lazy" />
+        <div class="g-item-overlay"><span class="g-item-label">Precision Cut</span></div>
+        <span class="g-item-zoom">+</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── INSTAGRAM STRIP ── -->
+  <div class="insta-strip">
+    <p class="insta-heading">See more of our work</p>
+    <a href="#" class="insta-handle">@lemonadehairswansea</a>
+  </div>
+
+  <!-- ── CTA ── -->
+  <section class="cta-section">
+    <div class="es-content" style="align-items:center;">
+      <span class="label" style="display:block;text-align:center;margin-bottom:20px;">Love what you see?</span>
+      <h2 class="cta-heading reveal">
+        Your best hair<br>starts <em>here.</em>
+      </h2>
+      <p class="cta-sub reveal d1">Book your appointment at Lemonade Hair, Swansea</p>
+      <a href="book.html" class="btn-cta reveal d2"><span>Book Your Appointment</span></a>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="f-brand-name">Lemonade</div>
+        <span class="f-brand-sub">Hair Swansea</span>
+        <p class="f-brand-text">A women's hair studio in the heart of Swansea, built on precision, craft, and the belief that great hair changes everything.</p>
+      </div>
+      <div class="f-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="index.html#services">Colour</a></li>
+          <li><a href="index.html#services">Cut &amp; Style</a></li>
+          <li><a href="index.html#services">Balayage</a></li>
+          <li><a href="index.html#services">Treatments</a></li>
+          <li><a href="index.html#services">Extensions</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="index.html#about">Our Story</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="team.html">Our Team</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Visit Us</h4>
+        <address>
+          Swansea, Wales<br>
+          Tue – Fri: 9am – 6pm<br>
+          Thu: 9am – 7pm<br>
+          Sat: 9am – 3pm<br>
+          Mon &amp; Sun: Closed<br><br>
+          <a href="book.html" style="color:var(--gold);text-decoration:none;">Book Online</a>
+        </address>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <p>© 2025 Lemonade Hair Swansea. All rights reserved.</p>
+      <div class="socials">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── LIGHTBOX ── -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lbClose">✕ &nbsp;Close</button>
+    <button class="lightbox-nav lightbox-prev" id="lbPrev">&#8592;</button>
+    <div class="lightbox-inner">
+      <img class="lightbox-img" id="lbImg" src="" alt="" />
+      <span class="lightbox-label" id="lbLabel"></span>
+    </div>
+    <button class="lightbox-nav lightbox-next" id="lbNext">&#8594;</button>
+  </div>
+
+  <script src="brand.js"></script>
+  <script>
+    // ── Gallery Filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.g-full-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        galleryItems.forEach(item => {
+          if (filter === 'all' || item.dataset.category === filter) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    // ── Lightbox
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbLabel = document.getElementById('lbLabel');
+    let currentIdx = 0;
+    let visibleItems = [];
+
+    function getVisible() {
+      return Array.from(galleryItems).filter(i => !i.classList.contains('hidden'));
+    }
+
+    function openLb(idx) {
+      visibleItems = getVisible();
+      currentIdx = idx;
+      const item = visibleItems[currentIdx];
+      lbImg.src = item.dataset.src;
+      lbImg.alt = item.dataset.label;
+      lbLabel.innerHTML = item.dataset.label;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLb() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+      lbImg.src = '';
+    }
+
+    galleryItems.forEach((item, i) => {
+      item.addEventListener('click', () => {
+        visibleItems = getVisible();
+        const vIdx = visibleItems.indexOf(item);
+        openLb(vIdx >= 0 ? vIdx : 0);
+      });
+    });
+
+    document.getElementById('lbClose').addEventListener('click', closeLb);
+    document.getElementById('lbPrev').addEventListener('click', () => {
+      visibleItems = getVisible();
+      currentIdx = (currentIdx - 1 + visibleItems.length) % visibleItems.length;
+      const item = visibleItems[currentIdx];
+      lbImg.src = item.dataset.src;
+      lbLabel.innerHTML = item.dataset.label;
+    });
+    document.getElementById('lbNext').addEventListener('click', () => {
+      visibleItems = getVisible();
+      currentIdx = (currentIdx + 1) % visibleItems.length;
+      const item = visibleItems[currentIdx];
+      lbImg.src = item.dataset.src;
+      lbLabel.innerHTML = item.dataset.label;
+    });
+    lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLb();
+      if (e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
+      if (e.key === 'ArrowRight') document.getElementById('lbNext').click();
+    });
+  </script>
+</body>
+</html>
