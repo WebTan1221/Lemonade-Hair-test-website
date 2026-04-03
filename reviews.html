@@ -15,12 +15,13 @@
       min-height: 44vh;
       background: var(--bg-deep);
       display: flex; align-items: flex-end;
-      padding: 118px 52px 68px;
+      padding: 118px 52px 64px;
       position: relative; overflow: hidden;
+      border-bottom: 1px solid rgba(200,168,75,.12);
     }
     .reviews-hero::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(ellipse 65% 55% at 65% 100%, rgba(200,168,75,.05) 0%, transparent 65%);
+      background: radial-gradient(ellipse 55% 50% at 15% 100%, rgba(200,168,75,.06) 0%, transparent 65%);
       pointer-events: none;
     }
     .hero-deco-q {
@@ -155,8 +156,10 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
       .reviews-hero { padding: 80px 28px 52px; min-height: 48vh; text-align: center;
+        align-items: center; justify-content: center;
         border-bottom: 1px solid rgba(200,168,75,.18);
       }
+      .reviews-hero-content { width: 100%; }
       .reviews-hero::before {
         background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(200,168,75,.08) 0%, transparent 68%);
       }
@@ -169,7 +172,7 @@
       .t-cols-wrap { max-height: 640px; }
     }
     @media (max-width: 640px) {
-      .reviews-hero { padding: 80px 20px 48px; min-height: 50vh; }
+      .reviews-hero { padding: 80px 20px 48px; min-height: 50vh; text-align: center; align-items: center; justify-content: center; }
       .summary-bar { padding: 28px 20px; flex-direction: column; gap: 0; }
       .sum-item { flex: none; width: 100%; padding: 20px 0; border-left: none !important; border-top: 1px solid rgba(200,168,75,.08); }
       .sum-item:first-child { border-top: none; }
@@ -452,7 +455,7 @@
       <div>
         <div class="f-brand-name">Lemonade</div>
         <span class="f-brand-sub">Hair Swansea</span>
-        <p class="f-brand-text">A women's hair studio in the heart of Swansea, built on precision, craft, and the belief that great hair changes everything.</p>
+        <p class="f-brand-text">A hair studio in the heart of Swansea, built on precision, craft, and the belief that great hair changes everything.</p>
       </div>
       <div class="f-col">
         <h4>Services</h4>
