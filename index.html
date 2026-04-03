@@ -26,7 +26,7 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       background: var(--bg-deep);
@@ -197,7 +197,7 @@
     }
     .marquee-track {
       display:flex; white-space:nowrap; align-items:center;
-      animation:marqueeRev 55s linear infinite;
+      animation:marqueeRev 18s linear infinite;
     }
     .marquee-tag {
       font-family:'Syne',sans-serif; font-weight:600;
@@ -423,6 +423,12 @@
     /* ── GALLERY ── */
     .gallery-section { padding:88px 0 88px 52px; background:var(--bg-deep); overflow:hidden; }
     .gallery-head { padding-right:52px; margin-bottom:40px; display:flex; justify-content:space-between; align-items:flex-end; }
+    .gallery-insta-bar { display: none; }
+    .gallery-insta-link-mobile {
+      font-size:10.5px; font-weight:600; letter-spacing:.18em; text-transform:uppercase;
+      color:var(--muted); text-decoration:none; transition: color .25s;
+    }
+    .gallery-insta-link-mobile:hover { color: var(--gold); }
     .gallery-viewport { overflow:hidden; width:100%; }
     .gallery-reel {
       display:flex; gap:14px; width:max-content;
@@ -740,6 +746,7 @@
       nav { padding: 22px 28px; }
       nav.scrolled { padding: 15px 28px; }
       .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
 
       /* Hero */
       .hero { min-height: 85vh; }
@@ -754,7 +761,11 @@
 
       /* Services */
       .services-section { padding: 80px 28px; }
-      .srv-stage { height: 460px; }
+      .srv-stage { height: 420px; }
+      .s-card.is-active { width: 88%; left: 50%; transform: translateX(-50%); }
+      .s-card.is-prev { width: 8%; left: 0; opacity: .15; filter: blur(3px); }
+      .s-card.is-next { width: 8%; right: 0; left: auto; opacity: .15; filter: blur(3px); }
+      .srv-btn-wrap { display: none; }
 
       /* Story */
       .story-section { grid-template-columns: 1fr; min-height: unset; }
@@ -763,12 +774,31 @@
 
       /* Team (index horizontal cards) */
       .team-section { padding: 72px 28px; }
+      .team-head { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 40px; }
       .team-grid { grid-template-columns: 1fr; gap: 16px; }
       .team-card { height: 220px; }
       .team-card-img { width: 190px; }
 
       /* Gallery */
       .gallery-section { padding: 72px 0 72px 28px; }
+      .gallery-insta-link { display: none; }
+      .gallery-insta-bar { display: block; padding: 24px 28px 0; }
+      .gallery-insta-link-mobile { display: block; text-align: center; }
+
+      /* Reviews */
+      .reviews-section { padding: 72px 28px; }
+      .reviews-head { flex-direction: column; align-items: flex-start; gap: 0; margin-bottom: 40px; }
+      .reviews-head > div { order: 0; }
+      .reviews-head .view-all { order: 1; margin-top: 16px; }
+      .reviews-grid { grid-template-columns: 1fr; gap: 16px; }
+      .r-card { padding: 28px 24px 24px; }
+      .r-text { font-size: 16px; margin-bottom: 22px; }
+
+      /* Footer */
+      footer { padding: 44px 28px 32px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 40px; }
+      .f-brand-text { font-size: 12px; }
+      .f-brand-name { font-size: 22px; }
 
       /* CTA (index local) */
       .cta-section { padding: 100px 28px; }
@@ -792,7 +822,9 @@
       /* Services */
       .services-section { padding: 56px 20px; }
       .services-head { flex-direction: column; align-items: flex-start; gap: 20px; }
-      .srv-stage { height: 360px; }
+      .srv-stage { height: 340px; }
+      .s-card.is-active { width: 92%; }
+      .s-card.is-prev, .s-card.is-next { display: none; }
       .s-name { font-size: 34px; }
       .s-card-body { padding: 20px 24px 28px; }
 
@@ -800,8 +832,12 @@
       .story-text { padding: 44px 20px; }
       .story-img { min-height: 38vh; }
 
+      /* Services arrows — hide on small mobile, swipe only */
+      .srv-btn-wrap { display: none; }
+
       /* Team */
       .team-section { padding: 52px 20px; }
+      .team-head { flex-direction: column; align-items: flex-start; gap: 14px; margin-bottom: 28px; }
       .team-card { flex-direction: column; height: auto; }
       .team-card-img { width: 100%; height: 220px; }
       .team-card-body { padding: 22px 20px 26px; }
@@ -809,6 +845,22 @@
 
       /* Gallery */
       .gallery-section { padding: 56px 0 56px 20px; }
+      .gallery-head { padding-right: 20px; }
+      .gallery-insta-bar { padding: 20px 20px 0; }
+
+      /* Reviews */
+      .reviews-section { padding: 52px 20px; }
+      .reviews-head { margin-bottom: 32px; }
+      .r-card { padding: 22px 18px 20px; }
+      .r-text { font-size: 15px; }
+      .r-card::before { font-size: 90px; top: -4px; right: 14px; }
+
+      /* Footer */
+      footer { padding: 40px 20px 28px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; margin-bottom: 32px; }
+      .f-bottom { flex-direction: column; gap: 14px; text-align: center; }
+      .socials { justify-content: center; }
+      .f-brand-text { max-width: 100%; }
 
       /* CTA */
       .cta-section { padding: 72px 20px; }
@@ -1124,7 +1176,7 @@
         <span class="label">Our Work</span>
         <h2 class="section-heading reveal">The <em>results.</em></h2>
       </div>
-      <a href="#" class="nav-link" style="margin-right:52px; color:var(--muted);">@lemonadehairswansea</a>
+      <a href="#" class="gallery-insta-link" style="margin-right:52px; font-size:10.5px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); text-decoration:none;">@lemonadehairswansea</a>
     </div>
     <div class="gallery-viewport">
       <div class="gallery-reel">
@@ -1143,6 +1195,9 @@
         <div class="g-item"><img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?auto=format&fit=crop&w=400&h=534&q=80" alt="Hair gallery" /></div>
         <div class="g-item"><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=400&h=534&q=80" alt="Hair gallery" /></div>
       </div>
+    </div>
+    <div class="gallery-insta-bar">
+      <a href="#" class="gallery-insta-link-mobile">@lemonadehairswansea</a>
     </div>
   </section>
 

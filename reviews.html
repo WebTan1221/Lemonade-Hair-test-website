@@ -12,10 +12,10 @@
   <style>
     /* ── REVIEWS HERO ── */
     .reviews-hero {
-      min-height: 58vh;
+      min-height: 44vh;
       background: var(--bg-deep);
       display: flex; align-items: flex-end;
-      padding: 140px 52px 88px;
+      padding: 118px 52px 68px;
       position: relative; overflow: hidden;
     }
     .reviews-hero::before {
@@ -154,7 +154,7 @@
     }
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
-      .reviews-hero { padding: 100px 28px 64px; }
+      .reviews-hero { padding: 88px 28px 52px; min-height: 36vh; }
       .summary-bar { padding: 36px 28px; flex-wrap: wrap; gap: 0; }
       .sum-item { flex: 1 1 45%; padding: 16px 20px; }
       .sum-item + .sum-item { border-left: none; border-top: 1px solid rgba(200,168,75,.1); }
@@ -163,7 +163,7 @@
       .t-cols-wrap { max-height: 640px; }
     }
     @media (max-width: 640px) {
-      .reviews-hero { padding: 84px 20px 52px; }
+      .reviews-hero { padding: 78px 20px 40px; min-height: 30vh; }
       .summary-bar { padding: 28px 20px; flex-direction: column; gap: 0; }
       .sum-item { flex: none; width: 100%; padding: 20px 0; border-left: none !important; border-top: 1px solid rgba(200,168,75,.08); }
       .sum-item:first-child { border-top: none; }
@@ -181,7 +181,7 @@
   <!-- ── NAV ── -->
   <nav id="nav">
     <div class="nav-links">
-      <a href="index.html#services" class="nav-link">Services</a>
+      <a href="services.html" class="nav-link">Services</a>
       <a href="index.html#about"    class="nav-link">Our Studio</a>
       <a href="team.html"           class="nav-link">Our Team</a>
     </div>

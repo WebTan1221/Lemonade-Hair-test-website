@@ -165,17 +165,19 @@
     .insta-handle:hover { color: var(--gold-light); border-color: var(--gold-light); }
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
-      .gallery-hero { padding: 100px 28px 56px; }
-      .filter-bar-wrap { top: 73px; }
+      .gallery-hero { padding: 90px 28px 48px; min-height: 36vh; }
+      .filter-bar-wrap { position: fixed; top: 62px; left: 0; right: 0; z-index: 180; }
       .filter-bar { padding: 0 28px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-      .filter-btn { flex-shrink: 0; }
-      .masonry-section { padding: 44px 28px 80px; }
+      .filter-btn { flex-shrink: 0; cursor: auto; }
+      .masonry-section { padding: 104px 28px 80px; }
       .masonry-grid { columns: 2; column-gap: 12px; }
       .g-full-item { margin-bottom: 12px; }
       .insta-strip { padding: 52px 28px; }
     }
     @media (max-width: 640px) {
-      .gallery-hero { padding: 84px 20px 44px; }
+      .gallery-hero { padding: 78px 20px 36px; min-height: 30vh; }
+      .filter-bar-wrap { top: 56px; }
+      .masonry-section { padding: 92px 16px 60px; }
       .filter-bar { padding: 0 16px; }
       .filter-btn { padding: 16px 18px; font-size: 9px; }
       .masonry-section { padding: 32px 16px 60px; }
@@ -197,7 +199,7 @@
   <!-- ── NAV ── -->
   <nav id="nav">
     <div class="nav-links">
-      <a href="index.html#services" class="nav-link">Services</a>
+      <a href="services.html" class="nav-link">Services</a>
       <a href="index.html#about"    class="nav-link">Our Studio</a>
       <a href="team.html"           class="nav-link">Our Team</a>
     </div>

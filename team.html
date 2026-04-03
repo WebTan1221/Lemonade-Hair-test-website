@@ -12,10 +12,10 @@
   <style>
     /* ── PAGE HERO ── */
     .team-hero {
-      min-height: 62vh;
+      min-height: 46vh;
       background: var(--bg-deep);
       display: flex; align-items: flex-end;
-      padding: 140px 52px 88px;
+      padding: 118px 52px 72px;
       position: relative; overflow: hidden;
     }
     .team-hero::before {
@@ -132,21 +132,21 @@
     .profile-book span { position: relative; z-index: 1; }
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
-      .team-hero { padding: 100px 28px 64px; min-height: 48vh; }
+      .team-hero { padding: 88px 28px 52px; min-height: 38vh; }
       .stats-strip { padding: 28px; flex-wrap: wrap; gap: 0; }
       .stat-item { flex: 1 1 45%; padding: 16px 20px; }
       .stat-item + .stat-item { border-left: none; border-top: 1px solid rgba(200,168,75,.1); }
       .stat-item:nth-child(2) { border-left: 1px solid rgba(200,168,75,.14); }
-      .profile-section { grid-template-columns: 1fr; min-height: unset; }
-      .profile-section.flip { direction: ltr; }
+      .profile-section,
+      .profile-section.flip { grid-template-columns: 1fr; min-height: unset; direction: ltr; }
       .profile-img { min-height: 52vh; order: 0; }
-      .profile-section.flip .profile-img { order: 1; }
+      .profile-section.flip .profile-img { order: 0; }
       .profile-text { padding: 56px 40px; order: 1; }
-      .profile-section.flip .profile-text { order: 0; }
+      .profile-section.flip .profile-text { order: 1; }
       .profile-name { font-size: clamp(44px, 8vw, 72px); }
     }
     @media (max-width: 640px) {
-      .team-hero { padding: 84px 20px 48px; }
+      .team-hero { padding: 78px 20px 36px; min-height: 32vh; }
       .stats-strip { padding: 16px; }
       .stat-item { flex: 1 1 45%; padding: 12px 12px; }
       .stat-num { font-size: 30px; }
@@ -166,7 +166,7 @@
   <!-- ── NAV ── -->
   <nav id="nav">
     <div class="nav-links">
-      <a href="index.html#services" class="nav-link">Services</a>
+      <a href="services.html" class="nav-link">Services</a>
       <a href="index.html#about"    class="nav-link">Our Studio</a>
       <a href="team.html"           class="nav-link active">Our Team</a>
     </div>

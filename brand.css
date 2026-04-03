@@ -17,7 +17,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; max-width: 100%; }
 
 body {
   background: var(--bg-deep);
@@ -413,19 +413,26 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-6.5px) 
   a, button { cursor: auto; }
 
   /* Footer */
-  footer { padding: 52px 28px 36px; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  footer { padding: 44px 28px 32px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 40px; }
+  .f-brand-text { font-size: 12px; }
 
   /* CTA */
   .cta-section { padding: 100px 28px; }
 
   /* Page heroes */
-  .page-hero { padding: 96px 28px 60px; }
+  .page-hero { padding: 88px 28px 52px; min-height: 42vh; }
   .page-hero-heading { font-size: clamp(52px, 10vw, 96px); }
 
   /* Reviews section */
-  .reviews-section { padding: 80px 28px 88px; }
-  .reviews-grid { grid-template-columns: 1fr; gap: 20px; }
+  .reviews-section { padding: 72px 28px 80px; }
+  .reviews-head { flex-direction: column; align-items: flex-start; gap: 0; margin-bottom: 40px; }
+  .reviews-head > div { order: 0; }
+  .reviews-head .view-all { order: 1; margin-top: 16px; }
+  .reviews-grid { grid-template-columns: 1fr; gap: 16px; }
+  .r-card { padding: 28px 24px 24px; }
+  .r-text { font-size: 16px; margin-bottom: 22px; }
+  .f-brand-name { font-size: 22px; }
 
   /* Team section (brand.css version) */
   .team-section { padding: 72px 28px; }
@@ -441,18 +448,27 @@ body.menu-open .nav-hamburger span:nth-child(3) { transform: translateY(-6.5px) 
   nav.scrolled { padding: 14px 20px; }
 
   /* Footer */
-  footer { padding: 48px 20px 32px; }
-  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-  .f-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  footer { padding: 40px 20px 28px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; margin-bottom: 32px; }
+  .f-brand-text { max-width: 100%; font-size: 12px; }
+  .f-brand-name { font-size: 24px; }
+  .f-bottom { flex-direction: column; gap: 14px; text-align: center; }
   .socials { justify-content: center; }
+
+  /* Reviews */
+  .reviews-section { padding: 52px 20px 60px; }
+  .reviews-head { margin-bottom: 32px; }
+  .r-card { padding: 22px 18px 20px; }
+  .r-text { font-size: 15px; }
+  .r-card::before { font-size: 90px; top: -4px; right: 14px; }
 
   /* CTA */
   .cta-section { padding: 72px 20px; }
   .btn-cta { padding: 17px 36px; font-size: 10px; }
 
   /* Page heroes */
-  .page-hero { padding: 84px 20px 48px; min-height: 40vh; }
-  .page-hero-heading { font-size: clamp(46px, 13vw, 72px); }
+  .page-hero { padding: 78px 20px 40px; min-height: 36vh; }
+  .page-hero-heading { font-size: clamp(52px, 14vw, 78px); }
   .page-hero-sub { font-size: 12.5px; }
 
   /* Reviews */
