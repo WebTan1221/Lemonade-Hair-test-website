@@ -419,6 +419,11 @@
     .story-addr {
       font-size:12px; line-height:2; color:var(--muted); letter-spacing:.05em;
     }
+    .story-bottom {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-top: 0;
+    }
+    .story-team-link { margin-top: 0; align-self: flex-end; flex-shrink: 0; margin-left: 24px; }
 
     /* ── GALLERY ── */
     .gallery-section { padding:88px 0 88px 52px; background:var(--bg-deep); overflow:hidden; }
@@ -529,63 +534,6 @@
     }
     .socials a:hover { color:var(--gold); }
 
-    /* ── TEAM ── */
-    .team-section {
-      padding: 72px 52px;
-      background: var(--bg-dark);
-      position: relative; overflow: hidden;
-    }
-    .team-head {
-      display: flex; justify-content: space-between;
-      align-items: flex-end; margin-bottom: 44px;
-    }
-    .team-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
-    }
-    .team-card {
-      display: flex; height: 270px;
-      background: var(--bg-card);
-      border: 1px solid rgba(200,168,75,.08);
-      transition: border-color .4s;
-      overflow: hidden;
-    }
-    .team-card:hover { border-color: rgba(200,168,75,.22); }
-    .team-card-img {
-      width: 210px; flex-shrink: 0; overflow: hidden; position: relative; height: 100%;
-    }
-    .team-card-img img {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: grayscale(15%);
-      transition: transform .7s ease, filter .4s;
-    }
-    .team-card:hover .team-card-img img { transform: scale(1.04); filter: grayscale(0%); }
-    .team-card-img::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to right, transparent 60%, rgba(8,8,7,.4) 100%);
-    }
-    .team-card-body { padding: 28px 32px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
-    .team-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 30px; font-weight: 300;
-      color: var(--white); margin-bottom: 4px; line-height: 1;
-    }
-    .team-role {
-      font-size: 9.5px; font-weight: 600;
-      letter-spacing: .22em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 14px; display: block;
-    }
-    .team-bio {
-      font-size: 12.5px; line-height: 1.75;
-      color: var(--secondary); margin-bottom: 18px;
-    }
-    .team-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
-    .team-tag {
-      font-size: 9px; font-weight: 600;
-      letter-spacing: .16em; text-transform: uppercase;
-      color: var(--muted);
-      border: 1px solid rgba(112,107,98,.3);
-      padding: 4px 10px;
-    }
 
     /* ── REVIEWS ── */
     .reviews-section {
@@ -772,12 +720,9 @@
       .story-img { min-height: 46vh; }
       .story-text { padding: 56px 40px; }
 
-      /* Team (index horizontal cards) */
-      .team-section { padding: 72px 28px; }
-      .team-head { flex-direction: column; align-items: flex-start; gap: 16px; margin-bottom: 40px; }
-      .team-grid { grid-template-columns: 1fr; gap: 16px; }
-      .team-card { height: 220px; }
-      .team-card-img { width: 190px; }
+      /* Story */
+      .story-bottom { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .story-team-link { margin-left: 0; align-self: flex-start; }
 
       /* Gallery */
       .gallery-section { padding: 72px 0 72px 28px; }
@@ -795,10 +740,11 @@
       .r-text { font-size: 16px; margin-bottom: 22px; }
 
       /* Footer */
-      footer { padding: 44px 28px 32px; }
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 40px; }
-      .f-brand-text { font-size: 12px; }
+      footer { padding: 40px 28px 28px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px 36px; margin-bottom: 36px; }
+      .footer-grid > div:first-child { grid-column: 1 / -1; }
       .f-brand-name { font-size: 22px; }
+      .f-brand-text { font-size: 12px; max-width: 100%; }
 
       /* CTA (index local) */
       .cta-section { padding: 100px 28px; }
@@ -835,13 +781,6 @@
       /* Services arrows — hide on small mobile, swipe only */
       .srv-btn-wrap { display: none; }
 
-      /* Team */
-      .team-section { padding: 52px 20px; }
-      .team-head { flex-direction: column; align-items: flex-start; gap: 14px; margin-bottom: 28px; }
-      .team-card { flex-direction: column; height: auto; }
-      .team-card-img { width: 100%; height: 220px; }
-      .team-card-body { padding: 22px 20px 26px; }
-      .team-bio { font-size: 12px; }
 
       /* Gallery */
       .gallery-section { padding: 56px 0 56px 20px; }
@@ -856,11 +795,19 @@
       .r-card::before { font-size: 90px; top: -4px; right: 14px; }
 
       /* Footer */
-      footer { padding: 40px 20px 28px; }
-      .footer-grid { grid-template-columns: 1fr; gap: 28px; margin-bottom: 32px; }
-      .f-bottom { flex-direction: column; gap: 14px; text-align: center; }
-      .socials { justify-content: center; }
-      .f-brand-text { max-width: 100%; }
+      footer { padding: 36px 20px 24px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 20px 24px; margin-bottom: 24px; }
+      .footer-grid > div:first-child { grid-column: 1 / -1; }
+      .f-brand-name { font-size: 20px; letter-spacing: .2em; }
+      .f-brand-sub { font-size: 8px; }
+      .f-brand-text { font-size: 11.5px; margin-top: 12px; max-width: 100%; line-height: 1.6; }
+      .f-col h4 { margin-bottom: 14px; }
+      .f-col ul li { margin-bottom: 8px; }
+      .f-col ul li a { font-size: 12px; }
+      .f-col address { font-size: 12px; line-height: 1.85; }
+      .f-bottom { flex-direction: row; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-top: 20px; }
+      .f-bottom p { font-size: 10px; }
+      .socials { gap: 18px; }
 
       /* CTA */
       .cta-section { padding: 72px 20px; }
@@ -1109,63 +1056,18 @@
         <p class="editorial-body reveal d2">
           From the moment you walk through our door, you're in the hands of stylists who care deeply about their craft. We use only the finest colour systems and the most refined cutting techniques.
         </p>
-        <p class="story-addr reveal d3">
-          Tue – Wed: 9am – 6pm<br>
-          Thu: 9am – 7pm<br>
-          Fri: 9am – 6pm<br>
-          Sat: 9am – 3pm<br>
-          Mon &amp; Sun: Closed<br>
-          Swansea, Wales
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── MEET THE TEAM ── -->
-  <section class="team-section" id="team">
-    <div class="team-head">
-      <div>
-        <span class="label reveal">The People Behind the Work</span>
-        <h2 class="section-heading reveal d1">Meet the <em>team.</em></h2>
-      </div>
-      <a href="team.html" class="btn-ghost reveal d2">Full Profiles →</a>
-    </div>
-    <div class="team-grid">
-
-      <div class="team-card reveal d1">
-        <div class="team-card-img">
-          <img src="https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&fit=crop" alt="Cerys Davies — Senior Stylist" />
-        </div>
-        <div class="team-card-body">
-          <span class="team-role">Senior Stylist &amp; Colour Specialist</span>
-          <h3 class="team-name">Cerys Davies</h3>
-          <p class="team-bio">With over eight years behind the chair, Cerys is the studio's lead colourist. Her work spans seamless balayage to complex colour corrections — always approached with a precise, considered eye.</p>
-          <div class="team-tags">
-            <span class="team-tag">Balayage</span>
-            <span class="team-tag">Colour Correction</span>
-            <span class="team-tag">Tints &amp; Toners</span>
-          </div>
-          <a href="book.html" class="btn-ghost">Book with Cerys →</a>
+        <div class="story-bottom reveal d3">
+          <p class="story-addr">
+            Tue – Wed: 9am – 6pm<br>
+            Thu: 9am – 7pm<br>
+            Fri: 9am – 6pm<br>
+            Sat: 9am – 3pm<br>
+            Mon &amp; Sun: Closed<br>
+            Swansea, Wales
+          </p>
+          <a href="team.html" class="btn-ghost story-team-link">Meet the Team →</a>
         </div>
       </div>
-
-      <div class="team-card reveal d2">
-        <div class="team-card-img">
-          <img src="https://images.pexels.com/photos/3065169/pexels-photo-3065169.jpeg?auto=compress&cs=tinysrgb&w=500&h=600&fit=crop" alt="Megan Williams — Stylist" />
-        </div>
-        <div class="team-card-body">
-          <span class="team-role">Stylist &amp; Olaplex Specialist</span>
-          <h3 class="team-name">Megan Williams</h3>
-          <p class="team-bio">Megan joined Lemonade three years ago and quickly became the go-to for clients seeking healthier, stronger hair. Olaplex-certified and passionate about the science of hair, she brings depth to every appointment.</p>
-          <div class="team-tags">
-            <span class="team-tag">Olaplex</span>
-            <span class="team-tag">Cut &amp; Restyle</span>
-            <span class="team-tag">Treatments</span>
-          </div>
-          <a href="book.html" class="btn-ghost">Book with Megan →</a>
-        </div>
-      </div>
-
     </div>
   </section>
 

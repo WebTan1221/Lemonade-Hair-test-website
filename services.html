@@ -170,7 +170,13 @@
     }
 
     @media (max-width: 960px) {
-      .services-hero { padding: 90px 28px 48px; min-height: 36vh; }
+      .services-hero { padding: 100px 28px 56px; min-height: 48vh; text-align: center;
+        border-bottom: 1px solid rgba(200,168,75,.18);
+      }
+      .services-hero::before {
+        background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(200,168,75,.08) 0%, transparent 68%);
+      }
+      .page-hero-sub { max-width: 100%; }
       .svc-panel { grid-template-columns: 1fr; }
       .svc-panel-left { position: static; padding: 48px 28px 28px; border-right: none; border-bottom: 1px solid rgba(200,168,75,.1); }
       .svc-panel-right { padding: 28px 28px 52px; }
@@ -178,7 +184,7 @@
       .svc-panel-name { font-size: clamp(32px, 5vw, 48px); }
     }
     @media (max-width: 640px) {
-      .services-hero { padding: 78px 20px 36px; min-height: 32vh; }
+      .services-hero { padding: 96px 20px 52px; min-height: 52vh; }
       .svc-panel-left { padding: 36px 20px 22px; }
       .svc-panel-right { padding: 22px 20px 40px; }
       .svc-row { padding: 18px 0; }

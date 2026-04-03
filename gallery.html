@@ -165,7 +165,13 @@
     .insta-handle:hover { color: var(--gold-light); border-color: var(--gold-light); }
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
-      .gallery-hero { padding: 90px 28px 48px; min-height: 36vh; }
+      .gallery-hero { padding: 100px 28px 56px; min-height: 48vh; text-align: center;
+        border-bottom: 1px solid rgba(200,168,75,.18);
+      }
+      .gallery-hero::before {
+        background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(200,168,75,.08) 0%, transparent 68%);
+      }
+      .page-hero-sub { max-width: 100%; }
       .filter-bar-wrap { position: fixed; top: 62px; left: 0; right: 0; z-index: 180; }
       .filter-bar { padding: 0 28px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
       .filter-btn { flex-shrink: 0; cursor: auto; }
@@ -175,7 +181,7 @@
       .insta-strip { padding: 52px 28px; }
     }
     @media (max-width: 640px) {
-      .gallery-hero { padding: 78px 20px 36px; min-height: 30vh; }
+      .gallery-hero { padding: 96px 20px 52px; min-height: 50vh; }
       .filter-bar-wrap { top: 56px; }
       .masonry-section { padding: 92px 16px 60px; }
       .filter-bar { padding: 0 16px; }
