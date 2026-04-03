@@ -133,8 +133,10 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 960px) {
       .team-hero { padding: 80px 28px 52px; min-height: 48vh; text-align: center;
+        align-items: center; justify-content: center;
         border-bottom: 1px solid rgba(200,168,75,.18);
       }
+      .team-hero-content { width: 100%; }
       .team-hero::before {
         background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(200,168,75,.08) 0%, transparent 68%);
       }
@@ -152,7 +154,7 @@
       .profile-name { font-size: clamp(44px, 8vw, 72px); }
     }
     @media (max-width: 640px) {
-      .team-hero { padding: 80px 20px 48px; min-height: 52vh; }
+      .team-hero { padding: 80px 20px 48px; min-height: 52vh; text-align: center; align-items: center; justify-content: center; }
       .stats-strip { padding: 16px; }
       .stat-item { flex: 1 1 45%; padding: 12px 12px; }
       .stat-num { font-size: 30px; }
